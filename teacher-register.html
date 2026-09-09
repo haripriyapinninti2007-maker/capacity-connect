@@ -284,7 +284,6 @@ async function registerTeacher() {
     let specialization = document.getElementById("specialization").value;
     let experience = document.getElementById("experience").value;
     let teachingLanguage = document.getElementById("teachingLanguage").value;
-    let teachingMode = document.getElementById("teachingMode").value;
     let skills = document.getElementById("skills").value.trim();
     let city = document.getElementById("city").value;
     let password = document.getElementById("password").value;
@@ -302,7 +301,6 @@ async function registerTeacher() {
         specialization === "" ||
         experience === "" ||
         teachingLanguage === "" ||
-        teachingMode === "" ||
         skills === "" ||
         city === "" ||
         password === "" ||
@@ -360,7 +358,6 @@ async function registerTeacher() {
         localStorage.setItem("userSpecialization", specialization);
         localStorage.setItem("userExperience", experience);
         localStorage.setItem("userTeachingLanguage", teachingLanguage);
-        localStorage.setItem("userTeachingMode", teachingMode);
         localStorage.setItem("userSkills", skills);
         localStorage.setItem("userCity", city);
 
