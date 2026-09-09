@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CAPACITY CONNECT</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        /* HEADER */
+
+        header {
+            background-color: #203f6b;
+            height: 165px;
+            color: white;
+        }
+
+        .header-content {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
+
+        header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        /* LOGIN */
+
+        .nav-buttons {
+            display: flex;
+            align-self: flex-start;
+            margin-top: 20px;
+        }
+
+        .nav-buttons button {
+            background-color: white;
+            color: #222;
+            border: none;
+            padding: 11px 25px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #e5e5e5;
+        }
+
+        /* MAIN */
+
+        main {
+            text-align: center;
+        }
+
+        /* HERO */
+
+        .hero {
+            padding-top: 60px;
+        }
+
+        .hero h2 {
+            color: #222;
+            font-size: 36px;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 720px;
+            margin: auto;
+        }
+
+        /* ROLE CARDS */
+
+        .roles {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 45px;
+        }
+
+        .role-card {
+            width: 350px;
+            min-height: 210px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px 25px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+            border: 2px solid #203f6b;
+        }
+
+        .role-icon {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+        .role-card h3 {
+            font-size: 21px;
+            margin-bottom: 15px;
+            color: #203f6b;
+        }
+
+        .role-card p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        /* RESPONSIVE */
+
+        @media screen and (max-width: 750px) {
+
+            .header-content {
+                padding: 0 20px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
+            .roles {
+                display: block;
+                margin: 35px 20px;
+            }
+
+            .role-card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="header-content">
+
+            <div>
+                <h1>CAPACITY CONNECT</h1>
+
+                <p>
+                    Digital Capacity Building and Learning Management Portal
+                </p>
+            </div>
+
+            <div class="nav-buttons">
+
+                <button onclick="window.location.href='login.html'">
+                    Login
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <h2>Learn. Develop. Connect.</h2>
+
+            <p>
+                A centralized platform where teachers can provide training,
+                assign learning activities, and monitor student progress.
+            </p>
+
+        </section>
+
+
+        <!-- STUDENT + TEACHER -->
+
+        <section class="roles">
+
+            <!-- STUDENT -->
+
+            <div class="role-card"
+                 onclick="window.location.href='student-register.html'">
+
+                <div class="role-icon">
+                    👨‍🎓
+                </div>
+
+                <h3>
+                    Student 
+                </h3>
+
+                <p>
+                    Register as a learner and access courses,
+                    quizzes, skills and learning progress.
+                </p>
+
+            </div>
+
+
+            <!-- TEACHER -->
+
+            <div class="role-card"
+                 onclick="window.location.href='teacher-register.html'">
+
+                <div class="role-icon">
+                    👩‍🏫
+                </div>
+
+                <h3>
+                    Teacher 
+                </h3>
+
+                <p>
+                    Register as a trainer and create courses,
+                    training materials and assessments.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

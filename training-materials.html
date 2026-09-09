@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capacity Connect - Training Materials</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+            background: #31599d;
+            padding: 10px 18px;
+            border-radius: 5px;
+        }
+
+        .container {
+            padding: 40px 60px;
+        }
+
+        h1 {
+            color: #173b7a;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            margin-top: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background: #173b7a;
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .material-card {
+            background: #f8f9fc;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #173b7a;
+        }
+
+        .material-card h3 {
+            color: #173b7a;
+            margin-top: 0;
+        }
+
+        .delete-btn {
+            background: #c62828;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>CAPACITY CONNECT</h2>
+
+    <a class="back" href="teacher-dashboard.html">
+        ← Back to Dashboard
+    </a>
+</header>
+
+<div class="container">
+
+    <h1>📖 Training Materials</h1>
+    <p>Upload and manage learning materials for your students.</p>
+
+    <div class="box">
+
+        <h2>Add Training Material</h2>
+
+        <label>Material Title</label>
+        <input type="text" id="materialTitle"
+               placeholder="Enter material title">
+
+        <label>Material Type</label>
+        <select id="materialType">
+            <option value="">Select Type</option>
+            <option value="Notes">Notes</option>
+            <option value="Video">Video</option>
+            <option value="PDF">PDF</option>
+            <option value="Link">Learning Link</option>
+        </select>
+
+        <label>Description</label>
+        <textarea id="materialDescription"
+                  placeholder="Enter material description"></textarea>
+
+        <label>Material Link</label>
+        <input type="text" id="materialLink"
+               placeholder="Enter video / PDF / website link">
+
+        <button onclick="addMaterial()">
+            Add Material
+        </button>
+
+    </div>
+
+    <div class="box">
+
+        <h2>📚 Available Materials</h2>
+
+        <div id="materialList">
+            <p>No training materials added yet.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function addMaterial() {
+
+    let title =
+        document.getElementById("materialTitle").value.trim();
+
+    let type =
+        document.getElementById("materialType").value;
+
+    let description =
+        document.getElementById("materialDescription").value.trim();
+
+    let link =
+        document.getElementById("materialLink").value.trim();
+
+    if (title === "") {
+        alert("Please enter material title.");
+        return;
+    }
+
+    if (type === "") {
+        alert("Please select material type.");
+        return;
+    }
+
+    if (description === "") {
+        alert("Please enter description.");
+        return;
+    }
+
+    if (link === "") {
+        alert("Please enter material link.");
+        return;
+    }
+
+    let materials =
+        JSON.parse(localStorage.getItem("trainingMaterials")) || [];
+
+    materials.push({
+        title: title,
+        type: type,
+        description: description,
+        link: link
+    });
+
+    localStorage.setItem(
+        "trainingMaterials",
+        JSON.stringify(materials)
+    );
+
+    alert("Training material added successfully! 🎉");
+
+    document.getElementById("materialTitle").value = "";
+    document.getElementById("materialType").value = "";
+    document.getElementById("materialDescription").value = "";
+    document.getElementById("materialLink").value = "";
+
+    loadMaterials();
+}
+
+
+function loadMaterials() {
+
+    let materials =
+        JSON.parse(localStorage.getItem("trainingMaterials")) || [];
+
+    let list =
+        document.getElementById("materialList");
+
+    if (materials.length === 0) {
+        list.innerHTML =
+            "<p>No training materials added yet.</p>";
+        return;
+    }
+
+    list.innerHTML = "";
+
+    materials.forEach(function(material, index) {
+
+        list.innerHTML +=
+
+            "<div class='material-card'>" +
+
+            "<h3>📘 " + material.title + "</h3>" +
+
+            "<p><strong>Type:</strong> " +
+            material.type + "</p>" +
+
+            "<p>" + material.description + "</p>" +
+
+            "<a href='" + material.link +
+            "' target='_blank'>Open Material</a><br>" +
+
+            "<button class='delete-btn' " +
+            "onclick='deleteMaterial(" + index + ")'>" +
+            "Delete</button>" +
+
+            "</div>";
+    });
+}
+
+
+function deleteMaterial(index) {
+
+    let materials =
+        JSON.parse(localStorage.getItem("trainingMaterials")) || [];
+
+    materials.splice(index, 1);
+
+    localStorage.setItem(
+        "trainingMaterials",
+        JSON.stringify(materials)
+    );
+
+    loadMaterials();
+}
+
+loadMaterials();
+
+</script>
+
+</body>
+</html>

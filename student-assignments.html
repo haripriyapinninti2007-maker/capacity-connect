@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Capacity Connect - My Assignments</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #222;
+        }
+
+        header {
+            background: white;
+            padding: 18px 55px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px #ddd;
+        }
+
+        .logo {
+            color: #3159c9;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #3159c9;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            color: #23449e;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 25px;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #777;
+        }
+
+        .student-info {
+            background: white;
+            padding: 18px 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px #ddd;
+            margin-bottom: 25px;
+        }
+
+        .student-info strong {
+            color: #3159c9;
+        }
+
+        .assignment-list {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px #ddd;
+            overflow: hidden;
+        }
+
+        .assignment-card {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .assignment-card:last-child {
+            border-bottom: none;
+        }
+
+        .assignment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .assignment-header h2 {
+            color: #3159c9;
+            font-size: 22px;
+        }
+
+        .status {
+            padding: 7px 13px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .submitted {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .reviewed {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .assignment-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .assignment-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        .assignment-info span {
+            color: #555;
+        }
+
+        .submission-box {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid #eee;
+        }
+
+        .submission-box textarea {
+            width: 100%;
+            height: 90px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            resize: vertical;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .submit-btn {
+            background: #3159c9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background: #23449e;
+        }
+
+        .submitted-text {
+            background: #f1f8f3;
+            padding: 12px;
+            border-radius: 7px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .review-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f4f7ff;
+            border-radius: 8px;
+            border-left: 4px solid #3159c9;
+        }
+
+        .review-box p {
+            margin-top: 8px;
+            color: #555;
+        }
+
+        .empty {
+            background: white;
+            padding: 50px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px #ddd;
+            color: #777;
+        }
+
+        .empty h2 {
+            color: #3159c9;
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .assignment-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .assignment-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            Capacity Connect
+        </div>
+
+        <a class="back" href="dashboard.html">
+            ← Back to Dashboard
+        </a>
+
+    </header>
+
+    <div class="container">
+
+        <div class="title">
+
+            <h1>
+                My Assignments
+            </h1>
+
+            <p>
+                View and submit assignments given by your teacher.
+            </p>
+
+        </div>
+
+        <div class="student-info">
+
+            👨‍🎓 Student:
+            <strong id="studentName">
+                Student
+            </strong>
+
+        </div>
+
+        <div id="assignmentContainer">
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* GET LOGGED-IN STUDENT */
+
+        let studentName =
+            localStorage.getItem("userName") || "Student";
+
+        document.getElementById("studentName").innerText =
+            studentName;
+
+
+        /* LOAD ASSIGNMENTS AND SUBMISSIONS */
+
+        async function loadAssignments() {
+
+            let container =
+                document.getElementById("assignmentContainer");
+
+            try {
+
+                /* GET ASSIGNMENTS */
+
+                let assignmentResponse =
+                    await fetch("http://localhost:8081/api/assignments");
+
+                if (!assignmentResponse.ok) {
+                    throw new Error("Failed to load assignments");
+                }
+
+                let assignments =
+                    await assignmentResponse.json();
+
+
+                /* GET SUBMISSIONS */
+
+                let submissionResponse =
+                    await fetch("http://localhost:8081/api/submissions");
+
+                if (!submissionResponse.ok) {
+                    throw new Error("Failed to load submissions");
+                }
+
+                let submissions =
+                    await submissionResponse.json();
+
+
+                /* GET ONLY LOGGED-IN STUDENT ASSIGNMENTS */
+
+                let myAssignments =
+                    assignments.filter(function (assignment) {
+
+                        return assignment.student === studentName;
+
+                    });
+
+
+                container.innerHTML = "";
+
+
+                /* NO ASSIGNMENTS */
+
+                if (myAssignments.length === 0) {
+
+                    container.innerHTML = `
+
+                        <div class="empty">
+
+                            <h2>
+                                No Assignments Yet
+                            </h2>
+
+                            <p>
+                                Your teacher has not assigned any tasks to you yet.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                /* ASSIGNMENT LIST */
+
+                let list =
+                    document.createElement("div");
+
+                list.className =
+                    "assignment-list";
+
+
+                myAssignments.forEach(function (assignment) {
+
+                    /* FIND SUBMISSION FOR THIS ASSIGNMENT */
+
+                    let submission =
+                        submissions.find(function (item) {
+
+                            return item.assignmentId === assignment.id &&
+                                   item.student === studentName;
+
+                        });
+
+
+                    let card =
+                        document.createElement("div");
+
+                    card.className =
+                        "assignment-card";
+
+
+                    /* STATUS */
+
+                    let statusHTML;
+
+
+                    if (submission && submission.feedback) {
+
+                        statusHTML = `
+
+                            <span class="status reviewed">
+                                Reviewed
+                            </span>
+
+                        `;
+
+                    } else if (submission) {
+
+                        statusHTML = `
+
+                            <span class="status submitted">
+                                Submitted
+                            </span>
+
+                        `;
+
+                    } else {
+
+                        statusHTML = `
+
+                            <span class="status pending">
+                                Pending
+                            </span>
+
+                        `;
+
+                    }
+
+
+                    /* ASSIGNMENT DETAILS */
+
+                    card.innerHTML = `
+
+                        <div class="assignment-header">
+
+                            <h2>
+                                ${assignment.title}
+                            </h2>
+
+                            ${statusHTML}
+
+                        </div>
+
+
+                        <div class="assignment-description">
+
+                            ${assignment.description}
+
+                        </div>
+
+
+                        <div class="assignment-info">
+
+                            <span>
+                                📚 <strong>Course:</strong>
+                                ${assignment.course}
+                            </span>
+
+                            <span>
+                                📅 <strong>Due:</strong>
+                                ${assignment.dueDate}
+                            </span>
+
+                            <span>
+                                📝 <strong>Maximum Marks:</strong>
+                                ${assignment.marks}
+                            </span>
+
+                        </div>
+
+                    `;
+
+
+                    /* SUBMISSION AREA */
+
+                    let submissionBox =
+                        document.createElement("div");
+
+                    submissionBox.className =
+                        "submission-box";
+
+
+                    if (submission) {
+
+                        submissionBox.innerHTML = `
+
+                            <strong>
+                                Your Submission
+                            </strong>
+
+                            <div class="submitted-text">
+
+                                ${submission.submissionText}
+
+                            </div>
+
+                        `;
+
+
+                        /* SHOW REVIEW */
+
+                        if (submission.feedback) {
+
+                            let reviewBox =
+                                document.createElement("div");
+
+                            reviewBox.className =
+                                "review-box";
+
+                            reviewBox.innerHTML = `
+
+                                <strong>
+                                    📊 Marks Obtained:
+                                    ${submission.marksObtained}
+                                    / ${assignment.marks}
+                                </strong>
+
+                                <p>
+                                    💬 <strong>Teacher Feedback:</strong>
+                                    ${submission.feedback}
+                                </p>
+
+                            `;
+
+                            submissionBox.appendChild(reviewBox);
+
+                        }
+
+                    } else {
+
+                        submissionBox.innerHTML = `
+
+                            <strong>
+                                Submit Your Assignment
+                            </strong>
+
+                            <br><br>
+
+                            <textarea
+                                id="submission-${assignment.id}"
+                                placeholder="Enter your answer or submission here...">
+                            </textarea>
+
+                            <br>
+
+                            <button
+                                class="submit-btn"
+                                onclick="submitAssignment(${assignment.id})">
+
+                                Submit Assignment
+
+                            </button>
+
+                        `;
+
+                    }
+
+
+                    card.appendChild(submissionBox);
+
+                    list.appendChild(card);
+
+                });
+
+
+                container.appendChild(list);
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                container.innerHTML = `
+
+                    <div class="empty">
+
+                        <h2>
+                            Unable to Load Assignments
+                        </h2>
+
+                        <p>
+                            Please make sure Spring Boot backend is running.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* SUBMIT ASSIGNMENT TO MYSQL */
+
+        async function submitAssignment(id) {
+
+            let textarea =
+                document.getElementById(
+                    "submission-" + id
+                );
+
+
+            if (!textarea) {
+                return;
+            }
+
+
+            let submission =
+                textarea.value.trim();
+
+
+            if (submission === "") {
+
+                alert(
+                    "Please enter your assignment answer."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                let response =
+                    await fetch(
+                        "http://localhost:8081/api/submissions",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                assignmentId: id,
+
+                                student: studentName,
+
+                                submissionText: submission,
+
+                                marksObtained: 0,
+
+                                feedback: ""
+
+                            })
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to submit assignment"
+                    );
+
+                }
+
+
+                alert(
+                    "Assignment submitted successfully! 🎉"
+                );
+
+
+                /* REFRESH */
+
+                loadAssignments();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert(
+                    "Unable to submit assignment. Please make sure Spring Boot is running."
+                );
+
+            }
+
+        }
+
+
+        /* INITIAL LOAD */
+
+        loadAssignments();
+
+    </script>
+
+</body>
+
+</html>

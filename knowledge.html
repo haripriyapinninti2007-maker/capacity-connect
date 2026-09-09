@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Knowledge Hub - Capacity Connect</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .back {
+            background: white;
+            color: #173b7a;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+        }
+
+        h1 {
+            color: #173b7a;
+        }
+
+        .search {
+            width: 100%;
+            padding: 14px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .card h2 {
+            color: #173b7a;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .resource {
+            background: #eef3ff;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .resource:hover {
+            background: #dce6ff;
+        }
+
+        .resource a {
+            text-decoration: none;
+            color: #173b7a;
+            font-weight: bold;
+        }
+
+        .no-result {
+            display: none;
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h2>CAPACITY CONNECT</h2>
+
+    <button class="back"
+        onclick="window.location.href='dashboard.html'">
+        ← Dashboard
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <h1>📚 Knowledge Hub</h1>
+
+    <p>
+        Explore useful learning resources, programming concepts
+        and professional knowledge.
+    </p>
+
+
+    <input
+        type="text"
+        id="searchBox"
+        class="search"
+        placeholder="🔍 Search learning resources..."
+        onkeyup="searchResources()"
+    >
+
+
+    <!-- JAVA -->
+
+    <div class="card">
+
+        <h2>☕ Java Programming</h2>
+
+        <p>
+            Learn Java programming concepts from basic to advanced level.
+        </p>
+
+        <div class="resource">
+            📖 Variables & Data Types
+        </div>
+
+        <div class="resource">
+            📖 Classes & Objects
+        </div>
+
+        <div class="resource">
+            📖 Inheritance & Polymorphism
+        </div>
+
+        <div class="resource">
+            📖 Exception Handling
+        </div>
+
+    </div>
+
+
+    <!-- PROGRAMMING -->
+
+    <div class="card">
+
+        <h2>💻 Programming Fundamentals</h2>
+
+        <p>
+            Improve your understanding of programming logic,
+            algorithms and problem solving.
+        </p>
+
+        <div class="resource">
+            🧠 Basic Programming Concepts
+        </div>
+
+        <div class="resource">
+            🧩 Problem Solving Techniques
+        </div>
+
+        <div class="resource">
+            🔢 Algorithms & Data Structures
+        </div>
+
+    </div>
+
+
+    <!-- WEB -->
+
+    <div class="card">
+
+        <h2>🌐 Web Development</h2>
+
+        <p>
+            Learn the fundamentals of creating modern websites.
+        </p>
+
+        <div class="resource">
+            🌐 HTML & CSS
+        </div>
+
+        <div class="resource">
+            ⚡ JavaScript Basics
+        </div>
+
+        <div class="resource">
+            🖥️ Responsive Web Design
+        </div>
+
+    </div>
+
+
+    <div class="no-result" id="noResult">
+
+        <h3>No resources found</h3>
+
+        <p>
+            Try searching with another keyword.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function searchResources() {
+
+    let search =
+        document.getElementById("searchBox")
+        .value
+        .toLowerCase();
+
+    let resources =
+        document.querySelectorAll(".resource");
+
+    let cards =
+        document.querySelectorAll(".card");
+
+    let found = false;
+
+
+    resources.forEach(function(resource) {
+
+        let text =
+            resource.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+
+            resource.style.display = "block";
+
+            found = true;
+
+        } else {
+
+            resource.style.display = "none";
+
+        }
+
+    });
+
+
+    /* SHOW/HIDE COURSE CARDS */
+
+    cards.forEach(function(card) {
+
+        let visibleResources =
+            card.querySelectorAll(
+                ".resource"
+            );
+
+        let visibleCount = 0;
+
+        visibleResources.forEach(function(resource) {
+
+            if (resource.style.display !== "none") {
+                visibleCount++;
+            }
+
+        });
+
+
+        if (visibleCount === 0) {
+
+            card.style.display = "none";
+
+        } else {
+
+            card.style.display = "block";
+
+        }
+
+    });
+
+
+    /* NO RESULT */
+
+    if (search !== "" && !found) {
+
+        document.getElementById("noResult")
+            .style.display = "block";
+
+    } else {
+
+        document.getElementById("noResult")
+            .style.display = "none";
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

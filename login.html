@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Capacity Connect - Login</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .login-box {
+            width: 350px;
+            margin: 120px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px #ccc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #173b7a;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background: #173b7a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #173b7a;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <h1>CAPACITY CONNECT</h1>
+
+        <p>Login to continue learning</p>
+
+        <label>Email</label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+        >
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+        >
+
+        <button
+            class="login-btn"
+            onclick="loginUser()">
+
+            Login
+
+        </button>
+
+        <a class="back" href="index.html">
+            ← Back to Home
+        </a>
+
+    </div>
+
+
+    <script>
+
+async function loginUser() {
+
+    let email =
+        document.getElementById("email").value.trim();
+
+    let password =
+        document.getElementById("password").value;
+
+
+    if (email === "") {
+        alert("Please enter your email");
+        return;
+    }
+
+
+    let emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address");
+        return;
+    }
+
+
+    if (password === "") {
+        alert("Please enter your password");
+        return;
+    }
+
+
+    try {
+
+        let response = await fetch(
+            "http://localhost:8081/api/auth/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+
+        let responseText = await response.text();
+
+        console.log("Login response:", responseText);
+
+
+        if (!response.ok) {
+
+            alert("Invalid email or password");
+
+            return;
+        }
+
+
+        if (responseText.trim() === "") {
+
+            alert("Invalid email or password");
+
+            return;
+        }
+
+
+        let user = JSON.parse(responseText);
+
+
+        if (user === null) {
+
+            alert("Invalid email or password");
+
+            return;
+        }
+
+
+        /* SAVE USER */
+
+        localStorage.setItem(
+            "userName",
+            user.name
+        );
+
+        localStorage.setItem(
+            "userEmail",
+            user.email
+        );
+
+        localStorage.setItem(
+            "userRole",
+            user.role
+        );
+
+        localStorage.setItem(
+            "userId",
+            user.id
+        );
+
+
+        alert("Login successful! 🎉");
+
+
+        /* ROLE REDIRECT */
+
+        if (user.role === "Learner") {
+
+            window.location.href =
+                "dashboard.html";
+
+        }
+
+        else if (user.role === "Trainer") {
+
+            window.location.href =
+                "teacher-dashboard.html";
+
+        }
+
+        else {
+
+            alert("Role not found");
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error("Login error:", error);
+
+        alert(
+            "Cannot connect to backend. Please make sure Spring Boot is running."
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

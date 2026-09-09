@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Certificate - Capacity Connect</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        header h2 {
+            margin: 0;
+        }
+
+
+        .back {
+            background: white;
+            color: #173b7a;
+
+            border: none;
+
+            padding: 10px 18px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: bold;
+        }
+
+
+        .back:hover {
+            background: #e8eef9;
+        }
+
+
+        /* =========================
+           CERTIFICATE
+        ========================= */
+
+        .certificate {
+
+            width: 75%;
+
+            margin: 50px auto;
+
+            background: white;
+
+            padding: 50px;
+
+            text-align: center;
+
+            border: 8px solid #173b7a;
+
+            box-shadow: 0 5px 20px #ccc;
+        }
+
+
+        .certificate h1 {
+
+            color: #173b7a;
+
+            font-size: 42px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .certificate h2 {
+
+            font-size: 30px;
+
+            margin: 20px;
+        }
+
+
+        .certificate p {
+
+            font-size: 18px;
+
+            color: #555;
+        }
+
+
+        /* =========================
+           COURSE
+        ========================= */
+
+        .course {
+
+            font-size: 26px;
+
+            color: #173b7a;
+
+            font-weight: bold;
+
+            margin: 25px;
+        }
+
+
+        /* =========================
+           COMPLETION
+        ========================= */
+
+        .completion {
+
+            font-size: 20px;
+
+            color: #173b7a;
+
+            font-weight: bold;
+
+            margin: 20px;
+        }
+
+
+        #completion {
+
+            font-size: 24px;
+        }
+
+
+        /* =========================
+           DATE
+        ========================= */
+
+        .date {
+
+            margin-top: 35px;
+        }
+
+
+        /* =========================
+           CERTIFICATE ID
+        ========================= */
+
+        .certificate-id {
+
+            font-size: 14px;
+
+            color: #777;
+
+            margin-top: 25px;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .completed {
+
+            color: green;
+
+            font-weight: bold;
+
+            font-size: 18px;
+        }
+
+
+        .not-completed {
+
+            color: #d35400;
+
+            font-weight: bold;
+
+            font-size: 18px;
+
+            margin-top: 25px;
+        }
+
+
+        /* =========================
+           PRINT BUTTON
+        ========================= */
+
+        .print-btn {
+
+            margin-top: 25px;
+
+            background: #173b7a;
+
+            color: white;
+
+            border: none;
+
+            padding: 12px 25px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            font-weight: bold;
+        }
+
+
+        .print-btn:hover:not(:disabled) {
+
+            background: #0f2d60;
+        }
+
+
+        /* DISABLED BUTTON */
+
+        .print-btn:disabled {
+
+            background: #999;
+
+            color: #eee;
+
+            cursor: not-allowed;
+
+            opacity: 0.7;
+        }
+
+
+        /* =========================
+           WARNING
+        ========================= */
+
+        .warning {
+
+            background: #fff3cd;
+
+            border: 1px solid #ffe69c;
+
+            color: #856404;
+
+            padding: 12px 18px;
+
+            border-radius: 6px;
+
+            margin: 20px auto;
+
+            max-width: 600px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           PRINT
+        ========================= */
+
+        @media print {
+
+            header,
+            .print-btn,
+            .warning,
+            #status {
+
+                display: none !important;
+            }
+
+
+            body {
+
+                background: white;
+            }
+
+
+            .certificate {
+
+                width: 85%;
+
+                margin: 20px auto;
+
+                box-shadow: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <h2>
+        CAPACITY CONNECT
+    </h2>
+
+
+    <button
+        class="back"
+        onclick="window.location.href='dashboard.html'">
+
+        ← Dashboard
+
+    </button>
+
+</header>
+
+
+
+<!-- =========================
+     CERTIFICATE
+========================= -->
+
+<div class="certificate">
+
+
+    <h1>
+        🏆 CERTIFICATE OF COMPLETION
+    </h1>
+
+
+    <p>
+        This certificate is proudly presented to
+    </p>
+
+
+    <!-- STUDENT NAME -->
+
+    <h2 id="studentName">
+        Learner
+    </h2>
+
+
+    <p>
+        for successfully completing the course
+    </p>
+
+
+    <!-- COURSE -->
+
+    <div class="course">
+
+        ☕
+        <span id="courseName">
+            Java Programming
+        </span>
+
+    </div>
+
+
+    <p>
+
+        This certificate recognizes the successful
+        completion of all learning modules and assessments.
+
+    </p>
+
+
+    <!-- COMPLETION -->
+
+    <div class="completion">
+
+        Course Completion:
+
+        <span id="completion">
+            0%
+        </span>
+
+    </div>
+
+
+    <!-- DATE -->
+
+    <p class="date">
+
+        Date:
+
+        <span id="date"></span>
+
+    </p>
+
+
+    <!-- CERTIFICATE ID -->
+
+    <p class="certificate-id">
+
+        Certificate ID:
+
+        <b id="certificateId"></b>
+
+    </p>
+
+
+    <p>
+
+        <b>
+            CAPACITY CONNECT
+        </b>
+
+    </p>
+
+
+    <!-- STATUS -->
+
+    <div id="status"></div>
+
+
+    <!-- WARNING -->
+
+    <div
+        id="warning"
+        class="warning"
+        style="display:none;">
+
+    </div>
+
+
+    <!-- PRINT -->
+
+    <button
+        id="printButton"
+        class="print-btn"
+        onclick="printCertificate()">
+
+        🖨️ Print / Save Certificate
+
+    </button>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================
+   STUDENT NAME
+===================================== */
+
+let studentName =
+    localStorage.getItem("userName") || "Learner";
+
+
+document.getElementById("studentName")
+    .innerText = studentName;
+
+
+
+/* =====================================
+   COURSE NAME
+===================================== */
+
+let course =
+    "Java Programming";
+
+
+document.getElementById("courseName")
+    .innerText = course;
+
+
+
+/* =====================================
+   TOTAL MODULES
+===================================== */
+
+const totalModules = 8;
+
+
+
+/* =====================================
+   CHECK COMPLETED MODULES
+===================================== */
+
+let completedModules = 0;
+
+
+for (
+    let i = 1;
+    i <= totalModules;
+    i++
+) {
+
+    if (
+        localStorage.getItem(
+            "javaModule" + i + "Completed"
+        ) === "true"
+    ) {
+
+        completedModules++;
+
+    }
+
+}
+
+
+
+/* =====================================
+   CALCULATE COMPLETION
+===================================== */
+
+let completion =
+    Math.round(
+        (completedModules / totalModules) * 100
+    );
+
+
+
+/* =====================================
+   DISPLAY COMPLETION
+===================================== */
+
+document.getElementById("completion")
+    .innerText = completion + "%";
+
+
+
+/* =====================================
+   DATE
+===================================== */
+
+let today =
+    new Date();
+
+
+document.getElementById("date")
+    .innerText =
+    today.toLocaleDateString();
+
+
+
+/* =====================================
+   CERTIFICATE ID
+===================================== */
+
+let userId =
+    localStorage.getItem("userId") || "001";
+
+
+let certificateId =
+    "CC-JAVA-" +
+    String(userId).padStart(3, "0") +
+    "-" +
+    new Date().getFullYear();
+
+
+document.getElementById("certificateId")
+    .innerText = certificateId;
+
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+let status =
+    document.getElementById("status");
+
+
+let warning =
+    document.getElementById("warning");
+
+
+let printButton =
+    document.getElementById("printButton");
+
+
+
+/* =====================================
+   CERTIFICATE ACCESS
+===================================== */
+
+if (completedModules === totalModules) {
+
+
+    /* ================================
+       ALL MODULES COMPLETED
+    ================================= */
+
+    status.innerHTML = `
+
+        <p class="completed">
+
+            ✓ Course Successfully Completed
+
+        </p>
+
+    `;
+
+
+    warning.style.display = "none";
+
+
+    /* ENABLE PRINT */
+
+    printButton.disabled = false;
+
+
+} else {
+
+
+    /* ================================
+       MODULES STILL REMAINING
+    ================================= */
+
+    status.innerHTML = `
+
+        <p class="not-completed">
+
+            🔒 Certificate download is locked.
+
+        </p>
+
+    `;
+
+
+    warning.style.display = "block";
+
+
+    warning.innerHTML = `
+
+        Complete all ${totalModules} modules
+        to download your certificate.
+
+        <br><br>
+
+        Current Progress:
+        <b>
+            ${completedModules} / ${totalModules}
+            (${completion}%)
+        </b>
+
+    `;
+
+
+    /* DISABLE PRINT */
+
+    printButton.disabled = true;
+
+}
+
+
+
+/* =====================================
+   PRINT / DOWNLOAD FUNCTION
+===================================== */
+
+function printCertificate() {
+
+
+    /* SAFETY CHECK */
+
+    if (
+        completedModules !== totalModules
+    ) {
+
+        alert(
+
+            "🔒 Please complete all 8 modules " +
+            "before downloading your certificate."
+
+        );
+
+        return;
+
+    }
+
+
+    /* ALLOW PRINT ONLY AT 8/8 */
+
+    window.print();
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

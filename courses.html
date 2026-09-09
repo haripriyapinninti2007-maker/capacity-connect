@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capacity Connect - Courses</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .back {
+            background: white;
+            color: #173b7a;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            padding: 40px 60px;
+        }
+
+        h1 {
+            color: #173b7a;
+        }
+
+        .search {
+            width: 100%;
+            max-width: 500px;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            margin: 15px 0 35px;
+            box-sizing: border-box;
+        }
+
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .course {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .course-icon {
+            font-size: 45px;
+        }
+
+        .course h2 {
+            color: #173b7a;
+        }
+
+        .course p {
+            line-height: 1.5;
+        }
+
+        .level {
+            display: inline-block;
+            background: #e8eef9;
+            color: #173b7a;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+        }
+
+        .start {
+            background: #173b7a;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .no-courses {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            color: #666;
+        }
+
+        @media (max-width: 900px) {
+            .courses {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .courses {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>CAPACITY CONNECT</h2>
+
+    <button class="back" onclick="window.location.href='dashboard.html'">
+        ← Dashboard
+    </button>
+</header>
+
+<div class="container">
+
+    <h1>Explore Courses 📚</h1>
+
+    <p>Choose a course and start developing your skills.</p>
+
+    <input
+        type="text"
+        id="searchInput"
+        class="search"
+        placeholder="🔍 Search courses..."
+        onkeyup="searchCourses()"
+    >
+
+    <div class="courses" id="courseList">
+        <p>Loading courses...</p>
+    </div>
+
+</div>
+
+<script>
+
+let allCourses = [];
+
+async function loadCourses() {
+
+    try {
+
+        let response = await fetch("http://localhost:8081/api/courses");
+
+        if (!response.ok) {
+            throw new Error("Failed to load courses");
+        }
+
+        allCourses = await response.json();
+
+        displayCourses(allCourses);
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.getElementById("courseList").innerHTML =
+            "<div class='no-courses'>" +
+            "<h3>Unable to load courses</h3>" +
+            "<p>Please make sure Spring Boot backend is running.</p>" +
+            "</div>";
+    }
+}
+
+
+function displayCourses(courses) {
+
+    let courseList = document.getElementById("courseList");
+
+    courseList.innerHTML = "";
+
+    if (courses.length === 0) {
+
+        courseList.innerHTML =
+            "<div class='no-courses'>" +
+            "<h3>No courses available</h3>" +
+            "<p>Teachers have not added any courses yet.</p>" +
+            "</div>";
+
+        return;
+    }
+
+
+    courses.forEach(function(course) {
+
+        let icon = getCourseIcon(course.name);
+
+        let courseDiv = document.createElement("div");
+
+        courseDiv.className = "course";
+
+        courseDiv.innerHTML =
+
+            "<div class='course-icon'>" + icon + "</div>" +
+
+            "<h2>" + course.name + "</h2>" +
+
+            "<span class='level'>" +
+            course.level +
+            "</span>" +
+
+            "<p>" +
+            course.description +
+            "</p>" +
+
+            "<p><b>Course ID:</b> " +
+            course.id +
+            "</p>" +
+
+            "<p><b>Trainer:</b> " +
+            course.teacherName +
+            "</p>" +
+
+            "<button class='start' onclick=\"startCourse('" +
+            course.name.replace(/'/g, "\\'") +
+            "')\">" +
+            "Start Course" +
+            "</button>";
+
+        courseList.appendChild(courseDiv);
+
+    });
+}
+
+
+function getCourseIcon(courseName) {
+
+    let name = courseName.toLowerCase();
+
+    if (name.includes("java")) {
+        return "☕";
+    }
+
+    if (name.includes("python")) {
+        return "🐍";
+    }
+
+    if (name.includes("sql") || name.includes("dbms")) {
+        return "🗄️";
+    }
+
+    if (name.includes("web")) {
+        return "🌐";
+    }
+
+    if (name.includes("artificial") || name.includes("ai")) {
+        return "🤖";
+    }
+
+    if (name.includes("cloud")) {
+        return "☁️";
+    }
+
+    return "📚";
+}
+
+
+function startCourse(courseName) {
+
+    if (courseName.toLowerCase() === "java programming") {
+
+        window.location.href = "java-course.html";
+
+    } else {
+
+        alert(
+            "You selected " +
+            courseName +
+            ". Course content will be available soon."
+        );
+    }
+}
+
+
+function searchCourses() {
+
+    let searchText =
+        document.getElementById("searchInput").value.toLowerCase();
+
+    let filteredCourses = allCourses.filter(function(course) {
+
+        return course.name.toLowerCase().includes(searchText) ||
+               course.description.toLowerCase().includes(searchText) ||
+               course.level.toLowerCase().includes(searchText);
+
+    });
+
+    displayCourses(filteredCourses);
+}
+
+
+loadCourses();
+
+</script>
+
+</body>
+</html>

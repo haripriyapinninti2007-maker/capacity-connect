@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Communication & Feedback</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 40px 60px;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        h1, h2 {
+            color: #173b7a;
+        }
+
+        .message {
+            background: #eef3ff;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .feedback {
+            background: #f0fff4;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        button {
+            background: #173b7a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0f2d60;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>CAPACITY CONNECT</h2>
+
+    <a href="dashboard.html" class="back">
+        ← Back to Dashboard
+    </a>
+</header>
+
+<div class="container">
+
+    <h1>Communication & Feedback</h1>
+
+    <p>
+        Communicate with your teacher and view your personal feedback.
+    </p>
+
+
+    <!-- Messages from Teacher -->
+
+    <div class="box">
+
+        <h2>💬 Messages from Teacher</h2>
+
+        <div class="message">
+
+            <strong>Teacher:</strong>
+        <p id="teacherMessage">
+            No new message from teacher.
+        </p>
+
+        </div>
+
+        <div class="message">
+
+            <strong>Teacher:</strong>
+
+            <p>
+                Good progress so far. Keep practicing Java programs.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Personal Feedback -->
+
+    <div class="box">
+
+        <h2>📝 Personal Feedback</h2>
+
+        <div class="feedback">
+
+            <strong>Teacher Feedback</strong>
+
+            <p id="teacherFeedback">
+                 No personal feedback available yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Reply to Teacher -->
+
+    <div class="box">
+
+        <h2>📨 Reply to Teacher</h2>
+
+        <textarea
+            id="studentReply"
+            placeholder="Write your message to the teacher...">
+        </textarea>
+
+        <button onclick="sendReply()">
+            Send Message
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function loadTeacherData() {
+
+    let studentName = localStorage.getItem("userName");
+
+    if (!studentName) {
+        studentName = "Student 1";
+    }
+
+    let message =
+        localStorage.getItem("teacherMessage_" + studentName);
+
+    let feedback =
+        localStorage.getItem("teacherFeedback_" + studentName);
+
+    if (message) {
+        document.getElementById("teacherMessage").innerText = message;
+    }
+
+    if (feedback) {
+        document.getElementById("teacherFeedback").innerText = feedback;
+    }
+}
+
+
+function sendReply() {
+
+    let message =
+        document.getElementById("studentReply").value.trim();
+
+    if (message === "") {
+        alert("Please enter a message.");
+        return;
+    }
+
+    let studentName =
+        localStorage.getItem("userName");
+
+    if (!studentName) {
+        studentName = "Student";
+    }
+
+    localStorage.setItem("studentReply", message);
+
+    localStorage.setItem(
+        "studentReplyStudent",
+        studentName
+    );
+
+    alert("Message sent to teacher successfully! 🎉");
+
+    document.getElementById("studentReply").value = "";
+}
+
+loadTeacherData();
+
+</script>
+
+
+</body>
+</html>

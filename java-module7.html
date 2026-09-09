@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Java Module 7 - Inheritance & Polymorphism</title>
+<style>
+body{margin:0;font-family:Arial;background:#f4f7fb}
+header{background:#173b7a;color:white;padding:20px 50px}
+.container{width:80%;margin:40px auto}
+.section{background:white;padding:25px;margin:20px 0;border-radius:10px;box-shadow:0 3px 12px #ddd}
+h1,h2{color:#173b7a}
+pre{background:#eee;padding:15px;border-radius:5px}
+button{background:#173b7a;color:white;border:0;padding:12px 25px;border-radius:5px}
+</style>
+</head>
+<body>
+
+<header><h2>CAPACITY CONNECT</h2></header>
+
+<div class="container">
+<h1>Module 7 — Inheritance & Polymorphism</h1>
+
+<div class="section">
+<h2>🧬 Inheritance</h2>
+<p>Inheritance allows one class to acquire properties and methods of another class.</p>
+
+<pre>
+class Animal {
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Barking");
+    }
+}
+</pre>
+</div>
+
+<div class="section">
+<h2>🔄 Polymorphism</h2>
+<p>Polymorphism means one name can have different forms.</p>
+
+<pre>
+class Animal {
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+</pre>
+</div>
+
+<div class="section">
+<h2>📌 What did we learn?</h2>
+<ul>
+<li>Inheritance</li>
+<li>extends keyword</li>
+<li>Polymorphism</li>
+<li>Method overriding</li>
+</ul>
+</div>
+
+<div class="section">
+<button onclick="window.location.href='java-quiz7.html'">
+Complete Module →
+</button>
+</div>
+</div>
+
+</body>
+</html>

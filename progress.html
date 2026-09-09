@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Progress - Capacity Connect</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .back {
+            background: white;
+            color: #173b7a;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+        }
+
+        h1 {
+            color: #173b7a;
+        }
+
+        .progress-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .course {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .course h2 {
+            color: #173b7a;
+        }
+
+        .bar {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .fill {
+            width: 0%;
+            height: 100%;
+            background: #173b7a;
+            transition: width 0.5s;
+        }
+
+        .module-list {
+            margin-top: 20px;
+        }
+
+        .module {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .module:last-child {
+            border-bottom: none;
+        }
+
+        .completed {
+            color: green;
+            font-weight: bold;
+        }
+
+        .pending {
+            color: #777;
+        }
+
+        .score {
+            font-size: 18px;
+        }
+
+        .summary {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .summary-box {
+            background: #f4f7fb;
+            padding: 15px 20px;
+            border-radius: 8px;
+            min-width: 150px;
+        }
+
+        .summary-box strong {
+            display: block;
+            color: #173b7a;
+            font-size: 22px;
+            margin-top: 5px;
+        }
+
+        .student-info {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .status-message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            background: #eef3ff;
+            color: #173b7a;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h2>CAPACITY CONNECT</h2>
+
+    <button class="back" onclick="window.location.href='dashboard.html'">
+        ← Dashboard
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <h1>📊 My Learning Progress</h1>
+
+    <p class="student-info">
+        Student:
+        <b id="studentName">Learner</b>
+    </p>
+
+
+    <div class="progress-card">
+
+        <h2>Overall Progress</h2>
+
+        <p id="overallText">
+            0% completed
+        </p>
+
+        <div class="bar">
+            <div class="fill" id="overallBar"></div>
+        </div>
+
+
+        <div class="summary">
+
+            <div class="summary-box">
+                Completed Modules
+                <strong id="completedCount">0</strong>
+            </div>
+
+            <div class="summary-box">
+                Total Modules
+                <strong>8</strong>
+            </div>
+
+            <div class="summary-box">
+                Average Quiz Score
+                <strong id="averageScore">0 / 5</strong>
+            </div>
+
+        </div>
+
+
+        <div class="course">
+
+            <h2>☕ Java Programming</h2>
+
+            <p>
+                <b>Course Progress:</b>
+                <span id="moduleProgress">
+                    0 of 8 Modules Completed
+                </span>
+            </p>
+
+
+            <div class="module-list" id="moduleList">
+            </div>
+
+
+            <p class="score">
+                🎯 Average Quiz Score:
+                <span id="quizScore">
+                    0 / 5
+                </span>
+            </p>
+
+        </div>
+
+
+        <div class="status-message" id="statusMessage">
+            Loading progress...
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* STUDENT NAME */
+
+    let studentName =
+        localStorage.getItem("userName") || "Learner";
+
+    document.getElementById("studentName").innerText =
+        studentName;
+
+
+    /* VARIABLES */
+
+    let completed = 0;
+
+    let totalScore = 0;
+
+    let attemptedQuizzes = 0;
+
+    let moduleList =
+        document.getElementById("moduleList");
+
+
+    moduleList.innerHTML = "";
+
+
+    /* CHECK MODULES */
+
+    for (let i = 1; i <= 8; i++) {
+
+        let isCompleted =
+            localStorage.getItem(
+                "javaModule" + i + "Completed"
+            ) === "true";
+
+
+        if (isCompleted) {
+
+            completed++;
+
+        }
+
+
+        /* QUIZ SCORE */
+
+        let score =
+            localStorage.getItem(
+                "javaModule" + i + "Score"
+            );
+
+
+        if (score !== null) {
+
+            totalScore += Number(score);
+
+            attemptedQuizzes++;
+
+        }
+
+
+        /* MODULE DISPLAY */
+
+        let module =
+            document.createElement("div");
+
+        module.className = "module";
+
+
+        if (isCompleted) {
+
+            module.innerHTML = `
+                <span class="completed">
+                    ✅ Module ${i} — Completed
+                </span>
+            `;
+
+        } else {
+
+            module.innerHTML = `
+                <span class="pending">
+                    ⏳ Module ${i} — Not Completed
+                </span>
+            `;
+
+        }
+
+
+        moduleList.appendChild(module);
+
+    }
+
+
+    /* MODULE PROGRESS */
+
+    document.getElementById("moduleProgress").innerText =
+        completed + " of 8 Modules Completed";
+
+
+    document.getElementById("completedCount").innerText =
+        completed;
+
+
+    /* OVERALL PROGRESS */
+
+    let progress =
+        Math.round((completed / 8) * 100);
+
+
+    document.getElementById("overallText").innerText =
+        progress + "% completed";
+
+
+    document.getElementById("overallBar").style.width =
+        progress + "%";
+
+
+    /* QUIZ AVERAGE */
+
+    let average = 0;
+
+
+    if (attemptedQuizzes > 0) {
+
+        average =
+            (totalScore / attemptedQuizzes).toFixed(1);
+
+    }
+
+
+    document.getElementById("quizScore").innerText =
+        average + " / 5";
+
+
+    document.getElementById("averageScore").innerText =
+        average + " / 5";
+
+
+    /* SAVE PROGRESS TO MYSQL */
+
+    async function saveProgressToBackend() {
+
+        try {
+
+            let response =
+                await fetch(
+                    "http://localhost:8081/api/progress"
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load progress"
+                );
+
+            }
+
+
+            let allProgress =
+                await response.json();
+
+
+            /* FIND CURRENT STUDENT + COURSE */
+
+            let existingProgress =
+                allProgress.find(function(item) {
+
+                    return item.student === studentName &&
+                           item.course === "Java Programming";
+
+                });
+
+
+            let progressData = {
+
+                student: studentName,
+
+                course: "Java Programming",
+
+                completedModules: completed,
+
+                totalModules: 8,
+
+                progressPercentage: progress
+
+            };
+
+
+            /* UPDATE EXISTING RECORD */
+
+            if (existingProgress) {
+
+                let updateResponse =
+                    await fetch(
+                        "http://localhost:8081/api/progress/" +
+                        existingProgress.id,
+                        {
+                            method: "PUT",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(progressData)
+                        }
+                    );
+
+
+                if (!updateResponse.ok) {
+
+                    throw new Error(
+                        "Unable to update progress"
+                    );
+
+                }
+
+
+                document.getElementById("statusMessage").innerText =
+                    "Progress updated successfully in MySQL.";
+
+            }
+
+
+            /* CREATE NEW RECORD */
+
+            else {
+
+                let createResponse =
+                    await fetch(
+                        "http://localhost:8081/api/progress",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(progressData)
+                        }
+                    );
+
+
+                if (!createResponse.ok) {
+
+                    throw new Error(
+                        "Unable to save progress"
+                    );
+
+                }
+
+
+                document.getElementById("statusMessage").innerText =
+                    "Progress saved successfully in MySQL.";
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Progress error:",
+                error
+            );
+
+            document.getElementById("statusMessage").innerText =
+                "Unable to connect to backend. Please make sure Spring Boot is running.";
+
+        }
+
+    }
+
+
+    /* SAVE PROGRESS */
+
+    saveProgressToBackend();
+
+</script>
+
+</body>
+
+</html>

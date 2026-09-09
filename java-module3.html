@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Java Module 3 - Operators & Control Statements</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .back {
+            background: white;
+            color: #173b7a;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+        }
+
+        h1, h2 {
+            color: #173b7a;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        pre {
+            background: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .next {
+            background: #173b7a;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>CAPACITY CONNECT</h2>
+
+    <button class="back"
+        onclick="window.location.href='java-course.html'">
+        ← Java Course
+    </button>
+</header>
+
+<div class="container">
+
+    <h1>Module 3 — Operators & Control Statements</h1>
+
+    <div class="section">
+        <h2>📘 What are Operators?</h2>
+
+        <p>
+            Operators are special symbols used to perform operations
+            on variables and values.
+        </p>
+
+        <ul>
+            <li>Arithmetic Operators</li>
+            <li>Relational Operators</li>
+            <li>Logical Operators</li>
+            <li>Assignment Operators</li>
+            <li>Increment and Decrement Operators</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>➕ Arithmetic Operators</h2>
+
+        <p>Arithmetic operators are used for mathematical calculations.</p>
+
+        <p>
+            <b>+</b> Addition<br>
+            <b>-</b> Subtraction<br>
+            <b>*</b> Multiplication<br>
+            <b>/</b> Division<br>
+            <b>%</b> Modulus
+        </p>
+
+        <pre>
+int a = 10;
+int b = 3;
+
+System.out.println(a + b);
+System.out.println(a - b);
+System.out.println(a * b);
+System.out.println(a / b);
+System.out.println(a % b);
+        </pre>
+    </div>
+
+    <div class="section">
+        <h2>🔍 Relational Operators</h2>
+
+        <p>
+            Relational operators are used to compare two values.
+        </p>
+
+        <p>
+            <b>==</b> Equal to<br>
+            <b>!=</b> Not equal to<br>
+            <b>&gt;</b> Greater than<br>
+            <b>&lt;</b> Less than<br>
+            <b>&gt;=</b> Greater than or equal to<br>
+            <b>&lt;=</b> Less than or equal to
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>🧠 Logical Operators</h2>
+
+        <p>
+            Logical operators are used to combine conditions.
+        </p>
+
+        <ul>
+            <li><b>&amp;&amp;</b> AND</li>
+            <li><b>||</b> OR</li>
+            <li><b>!</b> NOT</li>
+        </ul>
+
+        <pre>
+int age = 20;
+
+if(age >= 18 && age <= 60) {
+    System.out.println("Eligible");
+}
+        </pre>
+    </div>
+
+    <div class="section">
+        <h2>🔀 if-else Statement</h2>
+
+        <p>
+            The if-else statement is used to execute different
+            blocks of code based on a condition.
+        </p>
+
+        <pre>
+int age = 20;
+
+if(age >= 18) {
+    System.out.println("Adult");
+}
+else {
+    System.out.println("Minor");
+}
+        </pre>
+    </div>
+
+    <div class="section">
+        <h2>🔁 Loops</h2>
+
+        <p>
+            Loops are used to execute a block of code repeatedly.
+        </p>
+
+        <h3>For Loop</h3>
+
+        <pre>
+for(int i = 1; i <= 5; i++) {
+    System.out.println(i);
+}
+        </pre>
+
+        <h3>While Loop</h3>
+
+        <pre>
+int i = 1;
+
+while(i <= 5) {
+    System.out.println(i);
+    i++;
+}
+        </pre>
+    </div>
+
+    <div class="section">
+        <h2>📌 What did we learn?</h2>
+
+        <ul>
+            <li>Arithmetic operators</li>
+            <li>Relational operators</li>
+            <li>Logical operators</li>
+            <li>if-else statements</li>
+            <li>Loops</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <button class="next"
+            onclick="window.location.href='java-quiz3.html'">
+            Complete Module →
+        </button>
+    </div>
+
+</div>
+
+</body>
+</html>

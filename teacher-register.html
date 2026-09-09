@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capacity Connect - Teacher Registration</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .register-box {
+            width: 650px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px 45px;
+            border-radius: 15px;
+            box-shadow: 0 4px 18px #ccc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4b45d8;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            background: #f3f6fc;
+            padding: 14px;
+            border-radius: 8px;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 17px;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d2d2d2;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .field {
+            width: 50%;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            background: #4b45d8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .register-btn:hover {
+            background: #3731b8;
+        }
+
+        .terms {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .terms input {
+            width: auto;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+            color: #4b45d8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: 650px) {
+            .register-box {
+                width: 90%;
+                padding: 30px 25px;
+            }
+
+            .row {
+                display: block;
+            }
+
+            .field {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-box">
+
+    <h1>Capacity Connect</h1>
+
+    <div class="subtitle">
+        Teacher / Trainer Registration 👩‍🏫
+    </div>
+
+    <div class="info">
+        Create your trainer profile and start sharing your knowledge.
+    </div>
+
+    <label>Full Name</label>
+    <input type="text" id="name" placeholder="Enter your full name">
+
+    <label>Teacher ID</label>
+    <input type="text" id="teacherId" placeholder="Enter your teacher ID">
+
+    <label>Email Address</label>
+    <input type="email" id="email" placeholder="Enter your email">
+
+    <label>Mobile Number</label>
+    <input type="tel" id="phone" placeholder="Enter your mobile number">
+
+    <div class="row">
+
+        <div class="field">
+            <label>Gender</label>
+            <select id="gender">
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+                <option>Prefer not to say</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Date of Birth</label>
+            <input type="date" id="dob">
+        </div>
+
+    </div>
+
+    <label>Qualification</label>
+    <select id="qualification">
+        <option value="">Select qualification</option>
+        <option>Bachelor's Degree</option>
+        <option>Master's Degree</option>
+        <option>M.Tech</option>
+        <option>MBA</option>
+        <option>PhD</option>
+        <option>Other</option>
+    </select>
+
+    <label>Subject / Specialization</label>
+    <select id="specialization">
+        <option value="">Select specialization</option>
+        <option>Computer Science</option>
+        <option>Information Technology</option>
+        <option>Artificial Intelligence</option>
+        <option>Data Science</option>
+        <option>Programming</option>
+        <option>Web Development</option>
+        <option>Database Management</option>
+        <option>Other</option>
+    </select>
+
+    <label>Teaching Experience</label>
+    <select id="experience">
+        <option value="">Select experience</option>
+        <option>Fresher</option>
+        <option>Less than 1 year</option>
+        <option>1 - 2 years</option>
+        <option>2 - 5 years</option>
+        <option>5+ years</option>
+    </select>
+
+    <label>Preferred Teaching Language</label>
+    <select id="teachingLanguage">
+        <option value="">Select language</option>
+        <option>English</option>
+        <option>Telugu</option>
+        <option>Hindi</option>
+        <option>Tamil</option>
+        <option>Kannada</option>
+        <option>Malayalam</option>
+        <option>Other</option>
+    </select>
+
+   
+
+    <label>Skills</label>
+    <textarea id="skills"
+              placeholder="Example: Java, Python, Leadership, Communication..."></textarea>
+
+    <label>Location</label>
+    <select id="city">
+        <option value="">Select Location</option>
+        <option value="Visakhapatnam">Visakhapatnam</option>
+        <option value="Vizianagaram">Vizianagaram</option>
+        <option value="Vijayawada">Vijayawada</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Anantapur">Anantapur</option>
+        <option value="Tirupati">Tirupati</option>
+        <option value="Kurnool">Kurnool</option>
+        <option value="Nellore">Nellore</option>
+        <option value="Guntur">Guntur</option>
+        <option value="Kadapa">Kadapa</option>
+        <option value="Srikakulam">Srikakulam</option>
+        <option value="Rajahmundry">Rajahmundry</option>
+        <option value="Ongole">Ongole</option>
+        <option value="Chittoor">Chittoor</option>
+        <option value="Eluru">Eluru</option>
+        <option value="Bhimavaram">Bhimavaram</option>
+        <option value="Machilipatnam">Machilipatnam</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <label>Create Password</label>
+    <input type="password" id="password" placeholder="Create a password">
+
+    <label>Confirm Password</label>
+    <input type="password" id="confirmPassword" placeholder="Confirm your password">
+
+    <div class="terms">
+        <input type="checkbox" id="terms">
+        I agree to the Terms & Conditions and Privacy Policy.
+    </div>
+
+    <button class="register-btn" onclick="registerTeacher()">
+        Create Teacher Account
+    </button>
+
+    <a class="back" href="register.html">
+        ← Back to Home
+    </a>
+
+</div>
+
+<script>
+
+async function registerTeacher() {
+
+    let name = document.getElementById("name").value.trim();
+    let teacherId = document.getElementById("teacherId").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let gender = document.getElementById("gender").value;
+    let dob = document.getElementById("dob").value;
+    let qualification = document.getElementById("qualification").value;
+    let specialization = document.getElementById("specialization").value;
+    let experience = document.getElementById("experience").value;
+    let teachingLanguage = document.getElementById("teachingLanguage").value;
+    let teachingMode = document.getElementById("teachingMode").value;
+    let skills = document.getElementById("skills").value.trim();
+    let city = document.getElementById("city").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let terms = document.getElementById("terms").checked;
+
+    if (
+        name === "" ||
+        teacherId === "" ||
+        email === "" ||
+        phone === "" ||
+        gender === "" ||
+        dob === "" ||
+        qualification === "" ||
+        specialization === "" ||
+        experience === "" ||
+        teachingLanguage === "" ||
+        teachingMode === "" ||
+        skills === "" ||
+        city === "" ||
+        password === "" ||
+        confirmPassword === ""
+    ) {
+        alert("Please fill all details");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+    }
+
+    if (!terms) {
+        alert("Please accept Terms & Conditions");
+        return;
+    }
+
+    try {
+
+        let response = await fetch(
+            "http://localhost:8081/api/auth/register",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password,
+                    role: "Trainer"
+                })
+            }
+        );
+
+        if (!response.ok) {
+            alert("Registration failed. Email may already be registered.");
+            return;
+        }
+
+        let user = await response.json();
+
+        localStorage.setItem("userRole", "Trainer");
+        localStorage.setItem("userName", name);
+        localStorage.setItem("userId", user.id);
+        localStorage.setItem("teacherId", teacherId);
+        localStorage.setItem("userEmail", email);
+        localStorage.setItem("userPassword", password);
+        localStorage.setItem("userPhone", phone);
+        localStorage.setItem("userGender", gender);
+        localStorage.setItem("userDOB", dob);
+        localStorage.setItem("userQualification", qualification);
+        localStorage.setItem("userSpecialization", specialization);
+        localStorage.setItem("userExperience", experience);
+        localStorage.setItem("userTeachingLanguage", teachingLanguage);
+        localStorage.setItem("userTeachingMode", teachingMode);
+        localStorage.setItem("userSkills", skills);
+        localStorage.setItem("userCity", city);
+
+        alert("Teacher Registration Successful! 🎉");
+
+        window.location.href = "login.html";
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Cannot connect to backend. Please make sure Spring Boot is running."
+        );
+    }
+}
+
+</script>
+
+</body>
+</html>

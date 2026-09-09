@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Communication</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 40px 60px;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        h1,
+        h2 {
+            color: #173b7a;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            background: #173b7a;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            margin-top: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0f2d60;
+        }
+
+        .feedback-card {
+            background: #f0fff4;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+
+        .message-card {
+            background: #eef3ff;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h2>CAPACITY CONNECT</h2>
+
+    <a href="teacher-dashboard.html" class="back">
+        ← Back to Dashboard
+    </a>
+
+</header>
+
+
+<div class="container">
+
+    <h1>Student Communication & Personal Feedback</h1>
+
+    <p>
+        Communicate with students and provide personal feedback
+        about their learning progress.
+    </p>
+
+
+    <!-- SEND MESSAGE -->
+
+    <div class="box">
+
+        <h2>💬 Send Message to Student</h2>
+
+        <label>Select Student</label>
+
+        <select id="studentMessage">
+
+            <option value="">
+                -- Select Student --
+            </option>
+
+            <option value="sam">
+                Sam
+            </option>
+
+        </select>
+
+
+        <label>Message</label>
+
+        <textarea
+            id="message"
+            placeholder="Write your message to the student..."></textarea>
+
+
+        <button onclick="sendMessage()">
+            Send Message
+        </button>
+
+    </div>
+
+
+    <!-- PERSONAL FEEDBACK -->
+
+    <div class="box">
+
+        <h2>📝 Personal Feedback</h2>
+
+        <label>Select Student</label>
+
+        <select id="studentFeedback">
+
+            <option value="">
+                -- Select Student --
+            </option>
+
+            <option value="sam">
+                Sam
+            </option>
+
+        </select>
+
+
+        <label>Feedback</label>
+
+        <textarea
+            id="feedback"
+            placeholder="Write personal feedback for the student..."></textarea>
+
+
+        <button onclick="submitFeedback()">
+            Submit Feedback
+        </button>
+
+    </div>
+
+
+    <!-- RECENT FEEDBACK -->
+
+    <div class="box">
+
+        <h2>📋 Recent Feedback</h2>
+
+        <div id="feedbackList">
+
+            <p>
+                No feedback submitted yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- STUDENT REPLIES -->
+
+    <div class="box">
+
+        <h2>📨 Student Replies</h2>
+
+        <div id="studentReplyList">
+
+            <p>
+                No replies from students yet.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function loadStudents() {
+
+    let messageSelect =
+        document.getElementById("studentMessage");
+
+    let feedbackSelect =
+        document.getElementById("studentFeedback");
+
+    try {
+
+        let response =
+            await fetch("http://localhost:8081/api/users");
+
+        if (!response.ok) {
+            throw new Error("Failed to load students");
+        }
+
+        let users = await response.json();
+
+        let students = users.filter(function(user) {
+            return user.role === "Learner";
+        });
+
+        messageSelect.innerHTML =
+            '<option value="">-- Select Student --</option>';
+
+        feedbackSelect.innerHTML =
+            '<option value="">-- Select Student --</option>';
+
+        students.forEach(function(student) {
+
+            let option1 =
+                document.createElement("option");
+
+            option1.value = student.name;
+
+            option1.textContent =
+                student.name + " - " + student.email;
+
+            messageSelect.appendChild(option1);
+
+
+            let option2 =
+                document.createElement("option");
+
+            option2.value = student.name;
+
+            option2.textContent =
+                student.name + " - " + student.email;
+
+            feedbackSelect.appendChild(option2);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Cannot load students from backend. Please make sure Spring Boot is running."
+        );
+
+    }
+
+}
+
+
+/* SEND MESSAGE */
+
+function sendMessage() {
+
+    let student =
+        document.getElementById("studentMessage").value;
+
+    let message =
+        document.getElementById("message").value.trim();
+
+    if (student === "") {
+
+        alert("Please select a student.");
+
+        return;
+    }
+
+    if (message === "") {
+
+        alert("Please enter a message.");
+
+        return;
+    }
+
+    localStorage.setItem(
+        "teacherMessage_" + student,
+        message
+    );
+
+    alert(
+        "Message sent to " + student + " successfully! 🎉"
+    );
+
+    document.getElementById("message").value = "";
+
+}
+
+
+/* PERSONAL FEEDBACK */
+
+function submitFeedback() {
+
+    let student =
+        document.getElementById("studentFeedback").value;
+
+    let feedback =
+        document.getElementById("feedback").value.trim();
+
+    if (student === "") {
+
+        alert("Please select a student.");
+
+        return;
+    }
+
+    if (feedback === "") {
+
+        alert("Please enter feedback.");
+
+        return;
+    }
+
+    localStorage.setItem(
+        "teacherFeedback_" + student,
+        feedback
+    );
+
+    let feedbackList =
+        document.getElementById("feedbackList");
+
+    let newFeedback =
+        document.createElement("div");
+
+    newFeedback.className =
+        "feedback-card";
+
+    newFeedback.innerHTML =
+        "<strong>" + student + "</strong>" +
+        "<p>" + feedback + "</p>";
+
+    feedbackList.appendChild(newFeedback);
+
+    alert(
+        "Personal feedback sent to " +
+        student +
+        " successfully! 🎉"
+    );
+
+    document.getElementById("feedback").value = "";
+
+}
+
+
+/* STUDENT REPLIES */
+
+function loadStudentReply() {
+
+    let reply =
+        localStorage.getItem("studentReply");
+
+    let replyStudent =
+        localStorage.getItem("studentReplyStudent");
+
+    let replyList =
+        document.getElementById("studentReplyList");
+
+    if (reply) {
+
+        replyList.innerHTML =
+            "<div class='message-card'>" +
+
+            "<strong>" +
+            (replyStudent || "Student") +
+            "</strong>" +
+
+            "<p>" +
+            reply +
+            "</p>" +
+
+            "</div>";
+
+    }
+
+}
+
+
+/* INITIAL LOAD */
+
+loadStudents();
+
+loadStudentReply();
+
+</script>
+
+
+</body>
+
+</html>

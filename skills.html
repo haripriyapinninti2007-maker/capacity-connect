@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Skills - Capacity Connect</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        header {
+            background: #173b7a;
+            color: white;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .back {
+            background: white;
+            color: #173b7a;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 80%;
+            margin: 40px auto;
+        }
+
+        h1 {
+            color: #173b7a;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .skill-card h2 {
+            color: #173b7a;
+        }
+
+        .bar {
+            width: 100%;
+            height: 18px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            background: #173b7a;
+            transition: width 0.5s;
+        }
+
+        .status {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .message {
+            background: #eef3ff;
+            color: #173b7a;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        /* SKILL GAP ANALYZER */
+
+        .skill-gap-section {
+            background: white;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .skill-gap-section h2 {
+            color: #173b7a;
+            margin-top: 0;
+        }
+
+        .gap-intro {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .gap-card {
+            background: #fff4f4;
+            border-left: 5px solid #e74c3c;
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+
+        .gap-card h3 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+
+        .gap-card p {
+            margin: 7px 0;
+            color: #555;
+        }
+
+        .no-gap {
+            background: #f0fff4;
+            border-left: 5px solid #28a745;
+            padding: 18px;
+            border-radius: 8px;
+        }
+
+        .no-gap h3 {
+            margin-top: 0;
+            color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h2>CAPACITY CONNECT</h2>
+
+    <button class="back"
+        onclick="window.location.href='dashboard.html'">
+        ← Dashboard
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <h1>🎯 My Skills</h1>
+
+    <p>
+        Track your competency development through completed learning modules.
+    </p>
+
+
+    <!-- JAVA -->
+
+    <div class="skill-card">
+
+        <h2>☕ Java Programming</h2>
+
+        <p>
+            <b>Modules Completed:</b>
+            <span id="moduleCount">0</span> / 8
+        </p>
+
+        <div class="bar">
+
+            <div
+                class="fill"
+                id="skillBar"
+                style="width: 0%;">
+            </div>
+
+        </div>
+
+        <p class="status" id="skillStatus">
+            Beginner
+        </p>
+
+    </div>
+
+
+    <!-- PROGRAMMING FUNDAMENTALS -->
+
+    <div class="skill-card">
+
+        <h2>💻 Programming Fundamentals</h2>
+
+        <p>
+            Basic programming concepts, logic and problem solving.
+        </p>
+
+        <div class="bar">
+
+            <div
+                class="fill"
+                id="programmingBar"
+                style="width: 0%;">
+            </div>
+
+        </div>
+
+        <p
+            class="status"
+            id="programmingStatus">
+            Beginner
+        </p>
+
+    </div>
+
+
+    <!-- PROBLEM SOLVING -->
+
+    <div class="skill-card">
+
+        <h2>🧠 Problem Solving</h2>
+
+        <p>
+            Improve logical thinking through programming practice.
+        </p>
+
+        <div class="bar">
+
+            <div
+                class="fill"
+                id="problemBar"
+                style="width: 0%;">
+            </div>
+
+        </div>
+
+        <p
+            class="status"
+            id="problemStatus">
+            Beginner
+        </p>
+
+    </div>
+
+
+    <!-- SKILL GAP ANALYZER -->
+
+    <div class="skill-gap-section">
+
+        <h2>🤖 Skill Gap Analyzer</h2>
+
+        <p class="gap-intro">
+            The system analyzes your current skill progress and
+            identifies areas that need improvement.
+        </p>
+
+        <div id="skillGapResult">
+
+            <p>Analyzing your skills...</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- MYSQL STATUS -->
+
+    <div
+        class="message"
+        id="statusMessage">
+
+        Saving skills...
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* STUDENT */
+
+    let studentName =
+        localStorage.getItem("userName") || "Learner";
+
+
+    /* VARIABLES */
+
+    let completed = 0;
+
+    let totalQuizScore = 0;
+
+    let quizCount = 0;
+
+
+    /* CHECK COMPLETED JAVA MODULES */
+
+    for (let i = 1; i <= 8; i++) {
+
+        if (
+            localStorage.getItem(
+                "javaModule" + i + "Completed"
+            ) === "true"
+        ) {
+
+            completed++;
+
+        }
+
+
+        /* QUIZ SCORES */
+
+        let score =
+            localStorage.getItem(
+                "javaModule" + i + "Score"
+            );
+
+
+        if (score !== null) {
+
+            totalQuizScore += Number(score);
+
+            quizCount++;
+
+        }
+
+    }
+
+
+    /* JAVA SKILL */
+
+    let skillProgress =
+        Math.round((completed / 8) * 100);
+
+
+    document.getElementById("moduleCount").innerText =
+        completed;
+
+
+    document.getElementById("skillBar").style.width =
+        skillProgress + "%";
+
+
+    /* JAVA LEVEL */
+
+    let javaStatus = "Beginner";
+
+
+    if (skillProgress >= 75) {
+
+        javaStatus = "Advanced";
+
+    }
+    else if (skillProgress >= 40) {
+
+        javaStatus = "Intermediate";
+
+    }
+
+
+    document.getElementById("skillStatus").innerText =
+        javaStatus;
+
+
+    /* PROGRAMMING FUNDAMENTALS */
+
+    let programmingProgress =
+        Math.min(100, skillProgress + 10);
+
+
+    document.getElementById("programmingBar").style.width =
+        programmingProgress + "%";
+
+
+    let programmingStatus = "Beginner";
+
+
+    if (programmingProgress >= 75) {
+
+        programmingStatus = "Advanced";
+
+    }
+    else if (programmingProgress >= 40) {
+
+        programmingStatus = "Developing";
+
+    }
+
+
+    document.getElementById("programmingStatus").innerText =
+        programmingStatus;
+
+
+    /* PROBLEM SOLVING */
+
+    let problemProgress =
+        Math.min(
+            100,
+            Math.round(skillProgress * 0.8)
+        );
+
+
+    document.getElementById("problemBar").style.width =
+        problemProgress + "%";
+
+
+    let problemStatus = "Beginner";
+
+
+    if (problemProgress >= 75) {
+
+        problemStatus = "Advanced";
+
+    }
+    else if (problemProgress >= 40) {
+
+        problemStatus = "Developing";
+
+    }
+
+
+    document.getElementById("problemStatus").innerText =
+        problemStatus;
+
+
+    /* SAVE / UPDATE SKILL IN MYSQL */
+
+    async function saveSkill(
+        skillName,
+        progress,
+        level
+    ) {
+
+        let response =
+            await fetch(
+                "http://localhost:8081/api/skills"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load skills"
+            );
+
+        }
+
+
+        let allSkills =
+            await response.json();
+
+
+        /* FIND EXISTING SKILL */
+
+        let existingSkill =
+            allSkills.find(function(skill) {
+
+                return skill.student === studentName &&
+                       skill.skillName === skillName;
+
+            });
+
+
+        let skillData = {
+
+            student: studentName,
+
+            skillName: skillName,
+
+            progress: progress,
+
+            level: level
+
+        };
+
+
+        /* UPDATE */
+
+        if (existingSkill) {
+
+            let updateResponse =
+                await fetch(
+                    "http://localhost:8081/api/skills/" +
+                    existingSkill.id,
+                    {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(skillData)
+                    }
+                );
+
+
+            if (!updateResponse.ok) {
+
+                throw new Error(
+                    "Unable to update skill"
+                );
+
+            }
+
+        }
+
+
+        /* CREATE */
+
+        else {
+
+            let createResponse =
+                await fetch(
+                    "http://localhost:8081/api/skills",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(skillData)
+                    }
+                );
+
+
+            if (!createResponse.ok) {
+
+                throw new Error(
+                    "Unable to save skill"
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /* SAVE ALL SKILLS */
+
+    async function saveAllSkills() {
+
+        try {
+
+            await saveSkill(
+                "Java Programming",
+                skillProgress,
+                javaStatus
+            );
+
+
+            await saveSkill(
+                "Programming Fundamentals",
+                programmingProgress,
+                programmingStatus
+            );
+
+
+            await saveSkill(
+                "Problem Solving",
+                problemProgress,
+                problemStatus
+            );
+
+
+            document.getElementById(
+                "statusMessage"
+            ).innerText =
+                "Skills saved successfully in MySQL.";
+
+
+        } catch (error) {
+
+            console.error(
+                "Skills error:",
+                error
+            );
+
+
+            document.getElementById(
+                "statusMessage"
+            ).innerText =
+                "Unable to connect to backend. Please make sure Spring Boot is running.";
+
+        }
+
+    }
+
+
+    /* SKILL GAP ANALYZER */
+
+    async function loadSkillGap() {
+
+        try {
+
+            let response =
+                await fetch(
+                    "http://localhost:8081/api/skill-gap/" +
+                    encodeURIComponent(studentName)
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Unable to load skill gaps"
+                );
+
+            }
+
+
+            let gaps =
+                await response.json();
+
+
+            let result =
+                document.getElementById(
+                    "skillGapResult"
+                );
+
+
+            /* NO SKILL GAP */
+
+            if (gaps.length === 0) {
+
+                result.innerHTML = `
+
+                    <div class="no-gap">
+
+                        <h3>🎉 Great Job!</h3>
+
+                        <p>
+                            No major skill gaps were identified.
+                        </p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            /* DISPLAY GAPS */
+
+            result.innerHTML = "";
+
+
+            gaps.forEach(function(skill) {
+
+                let recommendation =
+                    "Practice more exercises and coding questions to improve this skill.";
+
+
+                if (
+                    skill.skillName ===
+                    "Problem Solving"
+                ) {
+
+                    recommendation =
+                        "Practice coding problems, logical reasoning and programming exercises regularly.";
+
+                }
+
+
+                if (
+                    skill.skillName ===
+                    "Programming Fundamentals"
+                ) {
+
+                    recommendation =
+                        "Revise basic programming concepts and practice simple coding programs.";
+
+                }
+
+
+                if (
+                    skill.skillName ===
+                    "Java Programming"
+                ) {
+
+                    recommendation =
+                        "Complete more Java modules and practice Java programming exercises.";
+
+                }
+
+
+                result.innerHTML += `
+
+                    <div class="gap-card">
+
+                        <h3>
+                            ⚠️ ${skill.skillName}
+                        </h3>
+
+                        <p>
+                            <strong>Current Progress:</strong>
+                            ${skill.progress}%
+                        </p>
+
+                        <p>
+                            <strong>Level:</strong>
+                            ${skill.level}
+                        </p>
+
+                        <p>
+                            <strong>Recommendation:</strong>
+                            ${recommendation}
+                        </p>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Skill Gap Error:",
+                error
+            );
+
+
+            document.getElementById(
+                "skillGapResult"
+            ).innerHTML = `
+
+                <p>
+                    Unable to load Skill Gap Analyzer.
+                    Please make sure Spring Boot is running.
+                </p>
+
+            `;
+
+        }
+
+    }
+
+
+    /* START */
+
+    saveAllSkills();
+
+    loadSkillGap();
+
+</script>
+
+</body>
+
+</html>
