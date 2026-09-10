@@ -238,6 +238,7 @@
         }
 
         @media screen and (max-width: 900px) {
+
             .stats,
             .options {
                 grid-template-columns: repeat(2, 1fr);
@@ -253,6 +254,7 @@
         }
 
         @media screen and (max-width: 600px) {
+
             .stats,
             .options {
                 grid-template-columns: 1fr;
@@ -269,7 +271,9 @@
             }
         }
     </style>
+
 </head>
+
 
 <body>
 
@@ -328,371 +332,412 @@
 
 <div class="container">
 
-<section class="welcome">
+    <section class="welcome">
 
-    <div>
+        <div>
 
-        <h1>
-            Welcome, <span id="teacherName">Teacher</span>! 👋
-        </h1>
+            <h1>
+                Welcome, <span id="teacherName">Teacher</span>! 👋
+            </h1>
 
-        <p>
-            Manage learning, assignments and student development from one place.
-        </p>
+            <p>
+                Manage learning, assignments and student development from one place.
+            </p>
 
-    </div>
+        </div>
 
-    <div class="date-box">
-        📅 <span id="currentDate"></span>
-    </div>
+        <div class="date-box">
+            📅 <span id="currentDate"></span>
+        </div>
 
-</section>
+    </section>
 
 
-<!-- STATISTICS -->
+    <!-- STATISTICS -->
 
-<section class="stats">
+    <section class="stats">
 
-    <div class="stat-card">
+        <div class="stat-card">
 
-        <div class="stat-icon">👥</div>
+            <div class="stat-icon">👥</div>
 
-        <h2 id="studentCount">Loading...</h2>
+            <h2 id="studentCount">Loading...</h2>
 
-        <p>Total Students</p>
-
-    </div>
-
-
-    <div class="stat-card">
-
-        <div class="stat-icon">📚</div>
-
-        <h2 id="assignmentCount">Loading...</h2>
-
-        <p>Active Assignments</p>
-
-    </div>
-
-
-    <div class="stat-card">
-
-        <div class="stat-icon">✅</div>
-
-        <h2 id="pendingReviewCount">Loading...</h2>
-
-        <p>Pending Reviews</p>
-
-    </div>
-
-
-    <div class="stat-card">
-
-        <div class="stat-icon">📈</div>
-
-        <h2 id="averagePerformance">Loading...</h2>
-
-        <p>Average Performance</p>
-
-    </div>
-
-</section>
-
-
-<!-- TEACHER OPTIONS -->
-
-<h2 class="section-title">
-    Teacher Options
-</h2>
-
-<section class="options">
-
-    <div class="option-card">
-
-        <div class="option-icon">📚</div>
-
-        <h3>Manage Courses</h3>
-
-        <p>
-            Create and manage your training courses.
-        </p>
-
-        <button onclick="goToCourses()">
-            Open
-        </button>
-
-    </div>
-
-
-    <div class="option-card">
-
-        <div class="option-icon">📖</div>
-
-        <h3>Training Materials</h3>
-
-        <p>
-            Upload notes, videos and learning materials.
-        </p>
-
-        <button onclick="goToMaterials()">
-            Open
-        </button>
-
-    </div>
-
-
-    <div class="option-card">
-
-        <div class="option-icon">📋</div>
-
-        <h3>Assignments / Tasks</h3>
-
-        <p>
-            Create and assign tasks for students.
-        </p>
-
-        <button onclick="goToAssignments()">
-            Open
-        </button>
-
-    </div>
-
-
-    <div class="option-card">
-
-        <div class="option-icon">📝</div>
-
-        <h3>Assessments</h3>
-
-        <p>
-            Create quizzes and assessments for learners.
-        </p>
-
-        <button onclick="showMessage('Assessments')">
-            Open
-        </button>
-
-    </div>
-
-
-    <div class="option-card">
-
-        <div class="option-icon">👨‍🎓</div>
-
-        <h3>Students</h3>
-
-        <p>
-            View students and monitor their activities.
-        </p>
-
-        <button onclick="goToStudents()">
-            View
-        </button>
-
-    </div>
-
-
-    <div class="option-card">
-
-        <div class="option-icon">📊</div>
-
-        <h3>Performance</h3>
-
-        <p>
-            Monitor learner progress and results.
-        </p>
-
-        <button onclick="showMessage('Performance')">
-            View
-        </button>
-
-    </div>
-
-
-    <div class="option-card">
-
-        <div class="option-icon">💬</div>
-
-        <h3>Student Communication</h3>
-
-        <p>
-            Communicate with students and provide feedback.
-        </p>
-
-        <button onclick="goToCommunication()">
-            Open
-        </button>
-
-    </div>
-
-
-    <!-- KNOWLEDGE HUB -->
-
-    <div class="option-card">
-
-        <div class="option-icon">💡</div>
-
-        <h3>Knowledge Hub</h3>
-
-        <p>
-            Share useful knowledge and resources.
-        </p>
-
-        <button onclick="goToKnowledgeHub()">
-            Open
-        </button>
-
-    </div>
-
-
-    <div class="option-card">
-
-        <div class="option-icon">📈</div>
-
-        <h3>Reports</h3>
-
-        <p>
-            View learning and performance reports.
-        </p>
-
-        <button onclick="showMessage('Reports')">
-            View
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- QUICK OVERVIEW + TOP STUDENTS -->
-
-<section class="bottom-section">
-
-    <div class="box">
-
-        <h2>⚡ Quick Overview</h2>
-
-        <div class="activity">
-
-            <strong id="dueSoonCount">
-                Loading...
-            </strong>
-
-            <br>
-
-            <span>
-                Review deadlines
-            </span>
+            <p>Total Students</p>
 
         </div>
 
 
-        <div class="activity">
+        <div class="stat-card">
 
-            <strong id="submissionWaitingCount">
-                Loading...
-            </strong>
+            <div class="stat-icon">📚</div>
 
-            <br>
+            <h2 id="assignmentCount">Loading...</h2>
 
-            <span>
-                Ready for evaluation
-            </span>
+            <p>Active Assignments</p>
 
         </div>
 
 
-        <div class="activity">
+        <div class="stat-card">
 
-            <strong id="attentionCount">
-                Loading...
-            </strong>
+            <div class="stat-icon">✅</div>
 
-            <br>
+            <h2 id="pendingReviewCount">Loading...</h2>
 
-            <span>
-                Progress below 50%
-            </span>
+            <p>Pending Reviews</p>
 
         </div>
 
 
-        <div class="activity">
+        <div class="stat-card">
 
-            <strong id="newMessageCount">
-                Loading...
-            </strong>
+            <div class="stat-icon">📈</div>
 
-            <br>
+            <h2 id="averagePerformance">Loading...</h2>
 
-            <span>
-                Check communication
-            </span>
+            <p>Average Performance</p>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <div class="box">
+    <!-- TEACHER OPTIONS -->
 
-        <h2>🏆 Top Students</h2>
+    <h2 class="section-title">
+        Teacher Options
+    </h2>
 
-        <div id="topStudents">
 
-            <div class="student">
+    <section class="options">
 
-                <strong>
-                    Loading students...
+
+        <div class="option-card">
+
+            <div class="option-icon">📚</div>
+
+            <h3>Manage Courses</h3>
+
+            <p>
+                Create and manage your training courses.
+            </p>
+
+            <button onclick="goToCourses()">
+                Open
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">📖</div>
+
+            <h3>Training Materials</h3>
+
+            <p>
+                Upload notes, videos and learning materials.
+            </p>
+
+            <button onclick="goToMaterials()">
+                Open
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">📋</div>
+
+            <h3>Assignments / Tasks</h3>
+
+            <p>
+                Create and assign tasks for students.
+            </p>
+
+            <button onclick="goToAssignments()">
+                Open
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">📝</div>
+
+            <h3>Assessments</h3>
+
+            <p>
+                Create quizzes and assessments for learners.
+            </p>
+
+            <button onclick="showMessage('Assessments')">
+                Open
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">👨‍🎓</div>
+
+            <h3>Students</h3>
+
+            <p>
+                View students and monitor their activities.
+            </p>
+
+            <button onclick="goToStudents()">
+                View
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">📊</div>
+
+            <h3>Performance</h3>
+
+            <p>
+                Monitor learner progress and results.
+            </p>
+
+            <button onclick="showMessage('Performance')">
+                View
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">💬</div>
+
+            <h3>Student Communication</h3>
+
+            <p>
+                Communicate with students and provide feedback.
+            </p>
+
+            <button onclick="goToCommunication()">
+                Open
+            </button>
+
+        </div>
+
+
+        <!-- KNOWLEDGE HUB -->
+
+        <div class="option-card">
+
+            <div class="option-icon">💡</div>
+
+            <h3>Knowledge Hub</h3>
+
+            <p>
+                Share useful knowledge and resources.
+            </p>
+
+            <!-- FIXED: knowledge.html -->
+
+            <button onclick="goToKnowledgeHub()">
+                Open
+            </button>
+
+        </div>
+
+
+        <div class="option-card">
+
+            <div class="option-icon">📈</div>
+
+            <h3>Reports</h3>
+
+            <p>
+                View learning and performance reports.
+            </p>
+
+            <button onclick="showMessage('Reports')">
+                View
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK OVERVIEW + TOP STUDENTS -->
+
+    <section class="bottom-section">
+
+
+        <div class="box">
+
+            <h2>⚡ Quick Overview</h2>
+
+            <div class="activity">
+
+                <strong id="dueSoonCount">
+                    Loading...
                 </strong>
+
+                <br>
+
+                <span>
+                    Review deadlines
+                </span>
+
+            </div>
+
+
+            <div class="activity">
+
+                <strong id="submissionWaitingCount">
+                    Loading...
+                </strong>
+
+                <br>
+
+                <span>
+                    Ready for evaluation
+                </span>
+
+            </div>
+
+
+            <div class="activity">
+
+                <strong id="attentionCount">
+                    Loading...
+                </strong>
+
+                <br>
+
+                <span>
+                    Progress below 50%
+                </span>
+
+            </div>
+
+
+            <div class="activity">
+
+                <strong id="newMessageCount">
+                    Loading...
+                </strong>
+
+                <br>
+
+                <span>
+                    Check communication
+                </span>
 
             </div>
 
         </div>
 
-    </div>
 
-</section>
+        <div class="box">
+
+            <h2>🏆 Top Students</h2>
+
+            <div id="topStudents">
+
+                <div class="student">
+
+                    <strong>
+                        Loading students...
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
 
 
 <script>
 
+
 /* =========================
    NAVIGATION
 ========================= */
 
 function goToDashboard() {
-    window.location.href = "teacher-dashboard.html";
+
+    window.location.href =
+        "teacher-dashboard.html";
+
 }
+
 
 function goToStudents() {
-    window.location.href = "students.html";
+
+    window.location.href =
+        "students.html";
+
 }
+
 
 function goToAssignments() {
-    window.location.href = "assignments.html";
+
+    window.location.href =
+        "assignments.html";
+
 }
+
 
 function goToCommunication() {
-    window.location.href = "student-communication.html";
+
+    window.location.href =
+        "student-communication.html";
+
 }
+
 
 function goToHelp() {
-    window.location.href = "help.html";
+
+    window.location.href =
+        "help.html";
+
 }
+
 
 function goToCourses() {
-    window.location.href = "teacher-courses.html";
+
+    window.location.href =
+        "teacher-courses.html";
+
 }
+
 
 function goToMaterials() {
-    window.location.href = "training-materials.html";
+
+    window.location.href =
+        "training-materials.html";
+
 }
 
+
+/* =========================
+   KNOWLEDGE HUB
+========================= */
+
 function goToKnowledgeHub() {
-    window.location.href = "knowledge-hub.html";
+
+    window.location.href =
+        "knowledge.html";
+
 }
 
 
@@ -700,7 +745,9 @@ function goToKnowledgeHub() {
    TEACHER NAME
 ========================= */
 
-let teacherName = localStorage.getItem("userName");
+let teacherName =
+    localStorage.getItem("userName");
+
 
 if (teacherName) {
 
@@ -709,6 +756,7 @@ if (teacherName) {
 
     document.getElementById("teacherNameTop").innerText =
         teacherName;
+
 }
 
 
@@ -716,13 +764,20 @@ if (teacherName) {
    CURRENT DATE
 ========================= */
 
-const today = new Date();
+const today =
+    new Date();
 
-const formattedDate = today.toLocaleDateString("en-US", {
-    month: "long",
-    day: "2-digit",
-    year: "numeric"
-});
+
+const formattedDate =
+    today.toLocaleDateString(
+        "en-US",
+        {
+            month: "long",
+            day: "2-digit",
+            year: "numeric"
+        }
+    );
+
 
 document.getElementById("currentDate").innerText =
     formattedDate;
@@ -732,67 +787,95 @@ document.getElementById("currentDate").innerText =
    REAL STUDENT COUNT
 ========================= */
 
-fetch("http://localhost:8081/api/auth/student-count")
+fetch(
+    "http://localhost:8081/api/auth/student-count"
+)
 
-    .then(response => response.text())
+.then(response =>
+    response.text()
+)
 
-    .then(count => {
+.then(count => {
 
-        document.getElementById("studentCount").innerText =
-            count;
+    document.getElementById(
+        "studentCount"
+    ).innerText = count;
 
-    })
+})
 
-    .catch(error => {
+.catch(error => {
 
-        console.error("Student count error:", error);
+    console.error(
+        "Student count error:",
+        error
+    );
 
-        document.getElementById("studentCount").innerText =
-            "0";
+    document.getElementById(
+        "studentCount"
+    ).innerText = "0";
 
-    });
+});
 
 
 /* =========================
    REAL ASSIGNMENT COUNT
 ========================= */
 
-fetch("http://localhost:8081/api/assignments")
+fetch(
+    "http://localhost:8081/api/assignments"
+)
 
-    .then(response => {
+.then(response => {
 
-        if (!response.ok) {
-            throw new Error("Failed to load assignments");
-        }
+    if (!response.ok) {
 
-        return response.json();
-
-    })
-
-    .then(assignments => {
-
-        document.getElementById("assignmentCount").innerText =
-            assignments.length;
-
-
-        const currentDate = new Date();
-
-        currentDate.setHours(0, 0, 0, 0);
-
-        const next7Days = new Date(currentDate);
-
-        next7Days.setDate(
-            currentDate.getDate() + 7
+        throw new Error(
+            "Failed to load assignments"
         );
 
+    }
 
-        const dueSoon = assignments.filter(
+    return response.json();
+
+})
+
+.then(assignments => {
+
+    document.getElementById(
+        "assignmentCount"
+    ).innerText =
+        assignments.length;
+
+
+    const currentDate =
+        new Date();
+
+    currentDate.setHours(
+        0, 0, 0, 0
+    );
+
+
+    const next7Days =
+        new Date(currentDate);
+
+    next7Days.setDate(
+        currentDate.getDate() + 7
+    );
+
+
+    const dueSoon =
+        assignments.filter(
             assignment => {
 
                 const dueDate =
-                    new Date(assignment.dueDate);
+                    new Date(
+                        assignment.dueDate
+                    );
 
-                dueDate.setHours(0, 0, 0, 0);
+                dueDate.setHours(
+                    0, 0, 0, 0
+                );
+
 
                 return (
                     dueDate >= currentDate &&
@@ -803,166 +886,210 @@ fetch("http://localhost:8081/api/assignments")
         );
 
 
-        document.getElementById("dueSoonCount").innerText =
-            dueSoon.length +
-            " assignments due soon";
+    document.getElementById(
+        "dueSoonCount"
+    ).innerText =
+        dueSoon.length +
+        " assignments due soon";
 
-    })
+})
 
-    .catch(error => {
+.catch(error => {
 
-        console.error("Assignment error:", error);
+    console.error(
+        "Assignment error:",
+        error
+    );
 
-        document.getElementById("assignmentCount").innerText =
-            "0";
+    document.getElementById(
+        "assignmentCount"
+    ).innerText = "0";
 
-        document.getElementById("dueSoonCount").innerText =
-            "0 assignments due soon";
+    document.getElementById(
+        "dueSoonCount"
+    ).innerText =
+        "0 assignments due soon";
 
-    });
+});
 
 
 /* =========================
    REAL PENDING REVIEWS
 ========================= */
 
-fetch("http://localhost:8081/api/submissions")
+fetch(
+    "http://localhost:8081/api/submissions"
+)
 
-    .then(response => {
+.then(response => {
 
-        if (!response.ok) {
-            throw new Error("Failed to load submissions");
-        }
+    if (!response.ok) {
 
-        return response.json();
+        throw new Error(
+            "Failed to load submissions"
+        );
 
-    })
+    }
 
-    .then(submissions => {
+    return response.json();
 
-        document.getElementById("pendingReviewCount").innerText =
-            submissions.length;
+})
 
-        document.getElementById("submissionWaitingCount").innerText =
-            submissions.length +
-            " submissions waiting";
+.then(submissions => {
 
-    })
+    document.getElementById(
+        "pendingReviewCount"
+    ).innerText =
+        submissions.length;
 
-    .catch(error => {
 
-        console.error("Submission error:", error);
+    document.getElementById(
+        "submissionWaitingCount"
+    ).innerText =
+        submissions.length +
+        " submissions waiting";
 
-        document.getElementById("pendingReviewCount").innerText =
-            "0";
+})
 
-        document.getElementById("submissionWaitingCount").innerText =
-            "0 submissions waiting";
+.catch(error => {
 
-    });
+    console.error(
+        "Submission error:",
+        error
+    );
+
+    document.getElementById(
+        "pendingReviewCount"
+    ).innerText = "0";
+
+
+    document.getElementById(
+        "submissionWaitingCount"
+    ).innerText =
+        "0 submissions waiting";
+
+});
 
 
 /* =========================
    REAL AVERAGE PERFORMANCE
 ========================= */
 
-fetch("http://localhost:8081/api/progress")
+fetch(
+    "http://localhost:8081/api/progress"
+)
 
-    .then(response => {
+.then(response => {
 
-        if (!response.ok) {
-            throw new Error("Failed to load progress");
-        }
+    if (!response.ok) {
 
-        return response.json();
+        throw new Error(
+            "Failed to load progress"
+        );
 
-    })
+    }
 
-    .then(progressData => {
+    return response.json();
 
-        if (progressData.length === 0) {
+})
 
-            document.getElementById(
-                "averagePerformance"
-            ).innerText = "0%";
-
-            document.getElementById(
-                "attentionCount"
-            ).innerText =
-                "0 students need attention";
-
-            document.getElementById(
-                "topStudents"
-            ).innerHTML = `
-                <div class="student">
-                    <strong>
-                        No student progress available
-                    </strong>
-                </div>
-            `;
-
-            return;
-        }
+.then(progressData => {
 
 
-        const totalProgress =
-            progressData.reduce(
-                (sum, item) =>
-                    sum + item.progressPercentage,
-                0
-            );
-
-
-        const averageProgress =
-            Math.round(
-                totalProgress /
-                progressData.length
-            );
-
+    if (progressData.length === 0) {
 
         document.getElementById(
             "averagePerformance"
         ).innerText =
-            averageProgress + "%";
-
-
-        const studentsNeedAttention =
-            progressData.filter(
-                item =>
-                    item.progressPercentage < 50
-            );
+            "0%";
 
 
         document.getElementById(
             "attentionCount"
         ).innerText =
-            studentsNeedAttention.length +
-            " students need attention";
+            "0 students need attention";
 
 
-        /* TOP STUDENTS */
+        document.getElementById(
+            "topStudents"
+        ).innerHTML = `
 
-        const topStudents =
-            [...progressData]
-                .sort(
-                    (a, b) =>
-                        b.progressPercentage -
-                        a.progressPercentage
-                )
-                .slice(0, 4);
+            <div class="student">
+
+                <strong>
+                    No student progress available
+                </strong>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
 
 
-        const topStudentsContainer =
-            document.getElementById(
-                "topStudents"
-            );
+    const totalProgress =
+        progressData.reduce(
+            (sum, item) =>
+                sum +
+                item.progressPercentage,
+            0
+        );
 
 
-        topStudentsContainer.innerHTML =
-            topStudents.map(
+    const averageProgress =
+        Math.round(
+            totalProgress /
+            progressData.length
+        );
+
+
+    document.getElementById(
+        "averagePerformance"
+    ).innerText =
+        averageProgress + "%";
+
+
+    const studentsNeedAttention =
+        progressData.filter(
+            item =>
+                item.progressPercentage < 50
+        );
+
+
+    document.getElementById(
+        "attentionCount"
+    ).innerText =
+        studentsNeedAttention.length +
+        " students need attention";
+
+
+    /* TOP STUDENTS */
+
+    const topStudents =
+        [...progressData]
+            .sort(
+                (a, b) =>
+                    b.progressPercentage -
+                    a.progressPercentage
+            )
+            .slice(0, 4);
+
+
+    const topStudentsContainer =
+        document.getElementById(
+            "topStudents"
+        );
+
+
+    topStudentsContainer.innerHTML =
+        topStudents
+            .map(
                 (student, index) => {
 
                     return `
+
                         <div class="student">
 
                             <strong>
@@ -976,84 +1103,98 @@ fetch("http://localhost:8081/api/progress")
                             </span>
 
                         </div>
+
                     `;
 
                 }
-            ).join("");
+            )
+            .join("");
 
-    })
+})
 
-    .catch(error => {
+.catch(error => {
 
-        console.error(
-            "Average performance error:",
-            error
-        );
+    console.error(
+        "Average performance error:",
+        error
+    );
 
-        document.getElementById(
-            "averagePerformance"
-        ).innerText =
-            "0%";
 
-        document.getElementById(
-            "attentionCount"
-        ).innerText =
-            "0 students need attention";
+    document.getElementById(
+        "averagePerformance"
+    ).innerText =
+        "0%";
 
-        document.getElementById(
-            "topStudents"
-        ).innerHTML = `
-            <div class="student">
-                <strong>
-                    Unable to load student progress
-                </strong>
-            </div>
-        `;
 
-    });
+    document.getElementById(
+        "attentionCount"
+    ).innerText =
+        "0 students need attention";
+
+
+    document.getElementById(
+        "topStudents"
+    ).innerHTML = `
+
+        <div class="student">
+
+            <strong>
+                Unable to load student progress
+            </strong>
+
+        </div>
+
+    `;
+
+});
 
 
 /* =========================
    REAL STUDENT MESSAGES
 ========================= */
 
-fetch("http://localhost:8081/api/communication")
+fetch(
+    "http://localhost:8081/api/communication"
+)
 
-    .then(response => {
+.then(response => {
 
-        if (!response.ok) {
-            throw new Error(
-                "Failed to load communication count"
-            );
-        }
+    if (!response.ok) {
 
-        return response.json();
-
-    })
-
-    .then(messageCount => {
-
-        document.getElementById(
-            "newMessageCount"
-        ).innerText =
-            messageCount +
-            " new student messages";
-
-    })
-
-    .catch(error => {
-
-        console.error(
-            "Communication error:",
-            error
+        throw new Error(
+            "Failed to load communication count"
         );
 
-        document.getElementById(
-            "newMessageCount"
-        ).innerText =
-            "0 new student messages";
+    }
 
-    });
+    return response.json();
+
+})
+
+.then(messageCount => {
+
+    document.getElementById(
+        "newMessageCount"
+    ).innerText =
+        messageCount +
+        " new student messages";
+
+})
+
+.catch(error => {
+
+    console.error(
+        "Communication error:",
+        error
+    );
+
+
+    document.getElementById(
+        "newMessageCount"
+    ).innerText =
+        "0 new student messages";
+
+});
 
 
 /* =========================
@@ -1076,17 +1217,25 @@ function showMessage(option) {
 
 function logoutTeacher() {
 
-    localStorage.removeItem("userEmail");
+    localStorage.removeItem(
+        "userEmail"
+    );
 
-    localStorage.removeItem("userName");
+    localStorage.removeItem(
+        "userName"
+    );
 
-    localStorage.removeItem("userRole");
+    localStorage.removeItem(
+        "userRole"
+    );
 
     window.location.href =
         "index.html";
+
 }
 
 </script>
+
 
 </body>
 
