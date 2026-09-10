@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 
 <html>
 
 <head>
-    <title>Capacity Connect - Teacher Dashboard</title>
+    <title>Capacity Connect - Student Dashboard</title>
 
 <style>
     * {
@@ -21,7 +20,7 @@
 
     header {
         background: white;
-        padding: 18px 55px;
+        padding: 18px 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -36,7 +35,6 @@
 
     .nav {
         display: flex;
-        align-items: center;
         gap: 28px;
     }
 
@@ -51,15 +49,14 @@
         color: #3159c9;
     }
 
-    .teacher {
+    .student-name {
         background: #f0f3ff;
         padding: 10px 15px;
-        border-radius: 25px;
+        border-radius: 20px;
         font-weight: bold;
     }
 
     /* HELP BUTTON */
-
     .help-btn {
         background: white;
         color: #3159c9;
@@ -79,8 +76,8 @@
         background: #3159c9;
         color: white;
         border: none;
-        padding: 11px 20px;
-        border-radius: 8px;
+        padding: 10px 18px;
+        border-radius: 7px;
         cursor: pointer;
         font-weight: bold;
     }
@@ -90,7 +87,7 @@
     }
 
     .container {
-        max-width: 1300px;
+        max-width: 1250px;
         margin: auto;
         padding: 40px 25px;
     }
@@ -103,7 +100,7 @@
     }
 
     .welcome h1 {
-        font-size: 34px;
+        font-size: 32px;
         margin-bottom: 8px;
     }
 
@@ -113,8 +110,8 @@
 
     .date-box {
         background: white;
-        padding: 15px 25px;
-        border-radius: 10px;
+        padding: 15px 22px;
+        border-radius: 9px;
         box-shadow: 0 2px 8px #ddd;
         color: #666;
     }
@@ -128,20 +125,14 @@
 
     .stat-card {
         background: white;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 2px 10px #ddd;
-    }
-
-    .stat-icon {
-        font-size: 25px;
-        margin-bottom: 15px;
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 2px 9px #ddd;
     }
 
     .stat-card h2 {
         color: #3159c9;
-        font-size: 30px;
-        margin-bottom: 5px;
+        margin: 8px 0;
     }
 
     .stat-card p {
@@ -149,124 +140,142 @@
     }
 
     .section-title {
-        margin: 30px 0 18px;
-        color: #222;
-    }
-
-    .options {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-    }
-
-    .option-card {
-        background: white;
-        padding: 25px;
-        border-radius: 14px;
-        box-shadow: 0 2px 10px #ddd;
-        text-align: center;
-        transition: 0.2s;
-    }
-
-    .option-card:hover {
-        transform: translateY(-4px);
-    }
-
-    .option-icon {
-        font-size: 40px;
-        margin-bottom: 15px;
-    }
-
-    .option-card h3 {
-        color: #3159c9;
-        margin-bottom: 10px;
-    }
-
-    .option-card p {
-        color: #777;
-        min-height: 45px;
         margin-bottom: 18px;
     }
 
-    .option-card button {
-        background: #3159c9;
-        color: white;
-        border: none;
-        padding: 10px 18px;
-        border-radius: 7px;
-        cursor: pointer;
-    }
-
-    .option-card button:hover {
-        background: #23449e;
-    }
-
-    .bottom-section {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 25px;
-        margin-top: 30px;
-    }
-
-    .box {
+    .options {
         background: white;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 2px 10px #ddd;
+        border-radius: 12px;
+        box-shadow: 0 2px 9px #ddd;
+        overflow: hidden;
     }
 
-    .box h2 {
-        margin-bottom: 20px;
-    }
-
-    .activity {
-        padding: 15px;
-        background: #f7f8fc;
-        margin-bottom: 10px;
-        border-radius: 8px;
-    }
-
-    .student {
+    .option {
         display: flex;
-        justify-content: space-between;
-        padding: 15px;
+        align-items: center;
+        padding: 17px 25px;
         border-bottom: 1px solid #eee;
     }
 
-    .percentage {
+    .option:last-child {
+        border-bottom: none;
+    }
+
+    .option-icon {
+        font-size: 23px;
+        width: 45px;
+    }
+
+    .option-info {
+        flex: 1;
+    }
+
+    .option-info h3 {
         color: #3159c9;
-        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .option-info p {
+        color: #777;
+        font-size: 14px;
+    }
+
+    .option button {
+        background: #3159c9;
+        color: white;
+        border: none;
+        padding: 9px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .option button:hover {
+        background: #23449e;
+    }
+
+    .progress-section {
+        background: white;
+        margin-top: 25px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 9px #ddd;
+    }
+
+    .progress-section h2 {
+        margin-bottom: 10px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 15px;
+        background: #e5e7ed;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 12px;
+    }
+
+    .progress {
+        height: 100%;
+        background: #3159c9;
+    }
+
+    /* TEACHER MESSAGE */
+
+    .message-section {
+        background: white;
+        margin-top: 25px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 9px #ddd;
+    }
+
+    .message-section h2 {
+        color: #3159c9;
+        margin-bottom: 15px;
+    }
+
+    .teacher-message {
+        background: #eef3ff;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid #3159c9;
+    }
+
+    .teacher-message strong {
+        color: #3159c9;
+    }
+
+    .teacher-message p {
+        margin-top: 8px;
+        color: #555;
+        line-height: 1.6;
     }
 
     @media screen and (max-width: 900px) {
-        .stats,
-        .options {
-            grid-template-columns: repeat(2, 1fr);
-        }
 
         .nav {
             display: none;
         }
 
-        .bottom-section {
-            grid-template-columns: 1fr;
+        .stats {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
     @media screen and (max-width: 600px) {
-        .stats,
-        .options {
-            grid-template-columns: 1fr;
-        }
 
-        header {
-            padding: 15px 20px;
+        .stats {
+            grid-template-columns: 1fr;
         }
 
         .welcome {
             flex-direction: column;
             align-items: flex-start;
-            gap: 20px;
+            gap: 15px;
+        }
+
+        header {
+            padding: 15px 20px;
         }
     }
 </style>
@@ -283,784 +292,567 @@
 
 <div class="nav">
 
-    <a onclick="window.location.href='teacher-dashboard.html'">
-        Dashboard
-    </a>
+```
+<a href="dashboard.html">Dashboard</a>
 
-    <a onclick="window.location.href='students.html'">
-        Students
-    </a>
+<a href="courses.html">Courses</a>
 
-    <a onclick="window.location.href='assignments.html'">
-        Tasks
-    </a>
+<a href="student-assignments.html">Assignments</a>
 
-    <a onclick="showMessage('Progress')">
-        Progress
-    </a>
+<a href="progress.html">Progress</a>
 
-    <a onclick="window.location.href='student-communication.html'">
-        Messages
-    </a>
+<a href="skills.html">Skills</a>
 
-    <a onclick="showMessage('Reports')">
-        Reports
-    </a>
+<a href="knowledge.html">Knowledge Hub</a>
+
+<a href="student-feedback.html">Messages</a>
+```
 
 </div>
 
 <div style="display:flex; gap:10px; align-items:center;">
 
-    <div class="teacher">
-        👨‍🏫 <span id="teacherNameTop">Teacher</span>
-    </div>
+```
+<div class="student-name">
+    👨‍🎓 <span id="studentNameTop">Student</span>
+</div>
 
-    <!-- HELP -->
+<button class="help-btn"
+    onclick="window.location.href='help.html'">
+    ❓ Help
+</button>
 
-    <button class="help-btn"
-        onclick="window.location.href='help.html'">
-        ❓ Help
-    </button>
-
-    <!-- LOGOUT -->
-
-    <button class="logout" onclick="logoutTeacher()">
-        Logout
-    </button>
+<button class="logout" onclick="logoutUser()">
+    Logout
+</button>
+```
 
 </div>
 
 </header>
 
-
 <div class="container">
+
+<!-- WELCOME -->
 
 <section class="welcome">
 
-    <div>
+```
+<div>
 
-        <h1>
-            Welcome, <span id="teacherName">Teacher</span>! 👋
-        </h1>
+    <h1>
+        Welcome, <span id="userName">Learner</span>! 👋
+    </h1>
 
-        <p>
-            Manage learning, assignments and student development from one place.
-        </p>
+    <p>
+        Continue your learning journey and develop your skills.
+    </p>
 
-    </div>
+</div>
 
-    <div class="date-box">
-        📅 <span id="currentDate"></span>
-    </div>
+<div class="date-box">
+    📅 <span id="currentDate"></span>
+</div>
+```
 
 </section>
 
-
-<!-- STATISTICS -->
+<!-- STATS -->
 
 <section class="stats">
 
-    <div class="stat-card">
+```
+<div class="stat-card">
 
-        <div class="stat-icon">👥</div>
+    <h2 id="courseCount">
+        0
+    </h2>
 
-        <h2 id="studentCount">Loading...</h2>
+    <p>
+        Enrolled Courses
+    </p>
 
-        <p>Total Students</p>
-
-    </div>
-
-
-    <div class="stat-card">
-
-        <div class="stat-icon">📚</div>
-
-        <h2 id="assignmentCount">Loading...</h2>
-
-        <p>Active Assignments</p>
-
-    </div>
+</div>
 
 
-    <div class="stat-card">
+<div class="stat-card">
 
-        <div class="stat-icon">✅</div>
+    <h2 id="completedCount">
+        0
+    </h2>
 
-        <h2 id="pendingReviewCount">Loading...</h2>
+    <p>
+        Completed Modules
+    </p>
 
-        <p>Pending Reviews</p>
-
-    </div>
+</div>
 
 
-    <div class="stat-card">
+<div class="stat-card">
 
-        <div class="stat-icon">📈</div>
+    <h2 id="progressNumber">
+        65%
+    </h2>
 
-        <h2 id="averagePerformance">Loading...</h2>
+    <p>
+        Overall Progress
+    </p>
 
-        <p>Average Performance</p>
+</div>
 
-    </div>
+
+<div class="stat-card">
+
+    <h2 id="assignmentCount">
+        0
+    </h2>
+
+    <p>
+        Assignments
+    </p>
+
+</div>
+```
 
 </section>
 
-
-<!-- TEACHER OPTIONS -->
+<!-- OPTIONS -->
 
 <h2 class="section-title">
-    Teacher Options
+    My Learning
 </h2>
 
 <section class="options">
 
-    <div class="option-card">
+```
+<div class="option">
 
-        <div class="option-icon">📚</div>
+    <div class="option-icon">
+        📚
+    </div>
 
-        <h3>Manage Courses</h3>
+    <div class="option-info">
+
+        <h3>
+            My Courses
+        </h3>
 
         <p>
-            Create and manage your training courses.
+            View and continue your enrolled courses.
         </p>
-
-        <button onclick="window.location.href='teacher-courses.html'">
-            Open
-        </button>
 
     </div>
 
+    <button onclick="window.location.href='courses.html'">
+        Open
+    </button>
 
-    <div class="option-card">
+</div>
 
-        <div class="option-icon">📖</div>
 
-        <h3>Training Materials</h3>
+<div class="option">
+
+    <div class="option-icon">
+        📋
+    </div>
+
+    <div class="option-info">
+
+        <h3>
+            My Assignments
+        </h3>
 
         <p>
-            Upload notes, videos and learning materials.
+            View tasks assigned by your teacher.
         </p>
-
-        <button onclick="window.location.href='training-materials.html'">
-            Open
-        </button>
 
     </div>
 
+    <button onclick="window.location.href='student-assignments.html'">
+        Open
+    </button>
 
-    <div class="option-card">
+</div>
 
-        <div class="option-icon">📋</div>
 
-        <h3>Assignments / Tasks</h3>
+<div class="option">
+
+    <div class="option-icon">
+        🎯
+    </div>
+
+    <div class="option-info">
+
+        <h3>
+            My Skills
+        </h3>
 
         <p>
-            Create and assign tasks for students.
+            Track your competency development.
         </p>
-
-        <button onclick="window.location.href='assignments.html'">
-            Open
-        </button>
 
     </div>
 
+    <button onclick="window.location.href='skills.html'">
+        Open
+    </button>
 
-    <div class="option-card">
+</div>
 
-        <div class="option-icon">📝</div>
 
-        <h3>Assessments</h3>
+<div class="option">
+
+    <div class="option-icon">
+        📊
+    </div>
+
+    <div class="option-info">
+
+        <h3>
+            My Progress
+        </h3>
 
         <p>
-            Create quizzes and assessments for learners.
+            Monitor your learning progress.
         </p>
-
-        <button onclick="showMessage('Assessments')">
-            Open
-        </button>
 
     </div>
 
+    <button onclick="window.location.href='progress.html'">
+        Open
+    </button>
 
-    <div class="option-card">
+</div>
 
-        <div class="option-icon">👨‍🎓</div>
 
-        <h3>Students</h3>
+<div class="option">
+
+    <div class="option-icon">
+        💡
+    </div>
+
+    <div class="option-info">
+
+        <h3>
+            Knowledge Hub
+        </h3>
 
         <p>
-            View students and monitor their activities.
+            Explore useful knowledge and resources.
         </p>
-
-        <button onclick="window.location.href='students.html'">
-            View
-        </button>
 
     </div>
 
+    <button onclick="window.location.href='knowledge.html'">
+        Open
+    </button>
 
-    <div class="option-card">
+</div>
 
-        <div class="option-icon">📊</div>
 
-        <h3>Performance</h3>
+<div class="option">
+
+    <div class="option-icon">
+        🏆
+    </div>
+
+    <div class="option-info">
+
+        <h3>
+            Certificate
+        </h3>
 
         <p>
-            Monitor learner progress and results.
+            View your course completion certificate.
         </p>
-
-        <button onclick="showMessage('Performance')">
-            View
-        </button>
 
     </div>
 
+    <button onclick="window.location.href='certificate.html'">
+        Open
+    </button>
 
-    <div class="option-card">
+</div>
 
-        <div class="option-icon">💬</div>
 
-        <h3>Student Communication</h3>
+<div class="option">
+
+    <div class="option-icon">
+        💬
+    </div>
+
+    <div class="option-info">
+
+        <h3>
+            Communication & Feedback
+        </h3>
 
         <p>
-            Communicate with students and provide feedback.
+            Communicate with your teacher and view feedback.
         </p>
-
-        <button onclick="window.location.href='student-communication.html'">
-            Open
-        </button>
 
     </div>
 
+    <button onclick="window.location.href='student-feedback.html'">
+        Open
+    </button>
 
-    <div class="option-card">
-
-        <div class="option-icon">💡</div>
-
-        <h3>Knowledge Hub</h3>
-
-        <p>
-            Share useful knowledge and resources.
-        </p>
-
-        <button onclick="window.location.href='knowledge.html'">
-            Open
-        </button>
-
-    </div>
-
-
-    <div class="option-card">
-
-        <div class="option-icon">📈</div>
-
-        <h3>Reports</h3>
-
-        <p>
-            View learning and performance reports.
-        </p>
-
-        <button onclick="showMessage('Reports')">
-            View
-        </button>
-
-    </div>
+</div>
+```
 
 </section>
 
+<!-- TEACHER MESSAGE -->
 
-<!-- QUICK OVERVIEW + TOP STUDENTS -->
+<section class="message-section">
 
-<section class="bottom-section">
+```
+<h2>
+    📨 Latest Message from Teacher
+</h2>
 
-    <div class="box">
+<div id="teacherMessageBox">
 
-        <h2>⚡ Quick Overview</h2>
+    <p>
+        Loading message...
+    </p>
 
-        <div class="activity">
+</div>
+```
 
-            <strong id="dueSoonCount">
-                Loading...
-            </strong>
+</section>
 
-            <br>
+<!-- PROGRESS -->
 
-            <span>
-                Review deadlines
-            </span>
+<section class="progress-section">
 
-        </div>
+```
+<h2>
+    📈 Overall Learning Progress
+</h2>
 
+<p id="progressText">
+    65% completed
+</p>
 
-        <div class="activity">
+<div class="progress-bar">
 
-            <strong id="submissionWaitingCount">
-                Loading...
-            </strong>
-
-            <br>
-
-            <span>
-                Ready for evaluation
-            </span>
-
-        </div>
-
-
-        <div class="activity">
-
-            <strong id="attentionCount">
-                Loading...
-            </strong>
-
-            <br>
-
-            <span>
-                Progress below 50%
-            </span>
-
-        </div>
-
-
-        <div class="activity">
-
-            <strong id="newMessageCount">
-                Loading...
-            </strong>
-
-            <br>
-
-            <span>
-                Check communication
-            </span>
-
-        </div>
-
+    <div
+        class="progress"
+        id="progressBar">
     </div>
 
-
-    <div class="box">
-
-        <h2>🏆 Top Students</h2>
-
-        <div id="topStudents">
-
-            <div class="student">
-
-                <strong>
-                    Loading students...
-                </strong>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
+```
 
 </section>
 
 </div>
 
-
 <script>
 
-/* =========================
-   TEACHER NAME
-========================= */
+    /* DATE */
 
-let teacherName = localStorage.getItem("userName");
+    const now = new Date();
 
-if (teacherName) {
-
-    document.getElementById("teacherName").innerText =
-        teacherName;
-
-    document.getElementById("teacherNameTop").innerText =
-        teacherName;
-
-}
+    document.getElementById("currentDate").textContent =
+        now.toLocaleDateString("en-US", {
+            month: "long",
+            day: "2-digit",
+            year: "numeric"
+        });
 
 
-/* =========================
-   CURRENT DATE
-========================= */
+    /* STUDENT NAME */
 
-const today = new Date();
+    let name =
+        localStorage.getItem("userName");
 
-const formattedDate = today.toLocaleDateString("en-US", {
-    month: "long",
-    day: "2-digit",
-    year: "numeric"
-});
+    if (name) {
 
-document.getElementById("currentDate").innerText =
-    formattedDate;
+        document.getElementById("userName").innerText =
+            name;
 
+        document.getElementById("studentNameTop").innerText =
+            name;
 
-/* =========================
-   REAL STUDENT COUNT
-========================= */
-
-fetch("http://localhost:8081/api/auth/student-count")
-
-    .then(response => response.text())
-
-    .then(count => {
-
-        document.getElementById("studentCount").innerText =
-            count;
-
-    })
-
-    .catch(error => {
-
-        console.error("Student count error:", error);
-
-        document.getElementById("studentCount").innerText =
-            "0";
-
-    });
+    }
 
 
-/* =========================
-   REAL ASSIGNMENT COUNT
-========================= */
+    /* COURSE COUNT */
 
-fetch("http://localhost:8081/api/assignments")
+    async function loadCourseCount() {
 
-    .then(response => {
+        try {
 
-        if (!response.ok) {
-            throw new Error("Failed to load assignments");
+            let response =
+                await fetch("http://localhost:8081/api/courses");
+
+            if (!response.ok) {
+                throw new Error("Failed to load courses");
+            }
+
+            let courses =
+                await response.json();
+
+            document.getElementById("courseCount").innerText =
+                courses.length;
+
+        } catch (error) {
+
+            console.error(error);
+
+            document.getElementById("courseCount").innerText =
+                "0";
+        }
+    }
+
+    loadCourseCount();
+
+
+    /* MODULE PROGRESS */
+
+    let completedModules = 0;
+
+    for (let i = 1; i <= 8; i++) {
+
+        if (
+            localStorage.getItem(
+                "javaModule" + i + "Completed"
+            ) === "true"
+        ) {
+
+            completedModules++;
+
         }
 
-        return response.json();
-
-    })
-
-    .then(assignments => {
-
-        document.getElementById("assignmentCount").innerText =
-            assignments.length;
+    }
 
 
-        const currentDate = new Date();
+    let progressValues =
+        [65, 70, 75, 80, 85, 90, 95, 98, 100];
 
-        currentDate.setHours(0, 0, 0, 0);
-
-        const next7Days = new Date(currentDate);
-
-        next7Days.setDate(
-            currentDate.getDate() + 7
-        );
+    let progress =
+        progressValues[completedModules];
 
 
-        const dueSoon = assignments.filter(
-            assignment => {
+    document.getElementById("progressText").innerText =
+        progress + "% completed";
 
-                const dueDate =
-                    new Date(assignment.dueDate);
+    document.getElementById("progressBar").style.width =
+        progress + "%";
 
-                dueDate.setHours(0, 0, 0, 0);
+    document.getElementById("progressNumber").innerText =
+        progress + "%";
 
-                return (
-                    dueDate >= currentDate &&
-                    dueDate <= next7Days
+    document.getElementById("completedCount").innerText =
+        completedModules;
+
+
+    /* ASSIGNMENT COUNT */
+
+    let assignments =
+        JSON.parse(
+            localStorage.getItem("teacherAssignments")
+        ) || [];
+
+    let studentName =
+        localStorage.getItem("userName");
+
+    let myAssignments =
+        assignments.filter(function(assignment) {
+
+            return assignment.student === studentName;
+
+        });
+
+    document.getElementById("assignmentCount").innerText =
+        myAssignments.length;
+
+
+    /* TEACHER MESSAGE */
+
+    async function loadTeacherMessage() {
+
+        let messageBox =
+            document.getElementById("teacherMessageBox");
+
+        try {
+
+            let response =
+                await fetch(
+                    "http://localhost:8081/api/communication/messages"
+                );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to load teacher message"
                 );
 
             }
-        );
+
+            let messages =
+                await response.json();
 
 
-        document.getElementById("dueSoonCount").innerText =
-            dueSoon.length +
-            " assignments due soon";
+            if (!messages || messages.length === 0) {
 
-    })
+                messageBox.innerHTML =
+                    "<p>No messages from your teacher yet.</p>";
 
-    .catch(error => {
-
-        console.error("Assignment error:", error);
-
-        document.getElementById("assignmentCount").innerText =
-            "0";
-
-        document.getElementById("dueSoonCount").innerText =
-            "0 assignments due soon";
-
-    });
+                return;
+            }
 
 
-/* =========================
-   REAL PENDING REVIEWS
-========================= */
-
-fetch("http://localhost:8081/api/submissions")
-
-    .then(response => {
-
-        if (!response.ok) {
-            throw new Error("Failed to load submissions");
-        }
-
-        return response.json();
-
-    })
-
-    .then(submissions => {
-
-        document.getElementById("pendingReviewCount").innerText =
-            submissions.length;
-
-        document.getElementById("submissionWaitingCount").innerText =
-            submissions.length +
-            " submissions waiting";
-
-    })
-
-    .catch(error => {
-
-        console.error("Submission error:", error);
-
-        document.getElementById("pendingReviewCount").innerText =
-            "0";
-
-        document.getElementById("submissionWaitingCount").innerText =
-            "0 submissions waiting";
-
-    });
+            let latestMessage =
+                messages[messages.length - 1];
 
 
-/* =========================
-   REAL AVERAGE PERFORMANCE
-   + TOP STUDENTS
-========================= */
+            messageBox.innerHTML =
 
-fetch("http://localhost:8081/api/progress")
+                "<div class='teacher-message'>" +
 
-    .then(response => {
+                "<strong>Teacher</strong>" +
 
-        if (!response.ok) {
-            throw new Error("Failed to load progress");
-        }
+                "<p>" +
+                latestMessage.message +
+                "</p>" +
 
-        return response.json();
+                "</div>";
 
-    })
+        } catch (error) {
 
-    .then(progressData => {
+            console.error(
+                "Teacher message error:",
+                error
+            );
 
-        if (progressData.length === 0) {
-
-            document.getElementById(
-                "averagePerformance"
-            ).innerText = "0%";
-
-            document.getElementById(
-                "attentionCount"
-            ).innerText =
-                "0 students need attention";
-
-            document.getElementById(
-                "topStudents"
-            ).innerHTML = `
-                <div class="student">
-                    <strong>
-                        No student progress available
-                    </strong>
-                </div>
-            `;
-
-            return;
+            messageBox.innerHTML =
+                "<p>No new messages available.</p>";
 
         }
 
+    }
 
-        const totalProgress =
-            progressData.reduce(
-                (sum, item) =>
-                    sum + item.progressPercentage,
-                0
-            );
+    loadTeacherMessage();
 
 
-        const averageProgress =
-            Math.round(
-                totalProgress /
-                progressData.length
-            );
+    /* LOGOUT */
 
+    function logoutUser() {
 
-        document.getElementById(
-            "averagePerformance"
-        ).innerText =
-            averageProgress + "%";
+        localStorage.removeItem("userEmail");
 
+        localStorage.removeItem("userName");
 
-        const studentsNeedAttention =
-            progressData.filter(
-                item =>
-                    item.progressPercentage < 50
-            );
+        window.location.href =
+            "index.html";
 
-
-        document.getElementById(
-            "attentionCount"
-        ).innerText =
-            studentsNeedAttention.length +
-            " students need attention";
-
-
-        /* TOP STUDENTS */
-
-        const topStudents =
-            [...progressData]
-                .sort(
-                    (a, b) =>
-                        b.progressPercentage -
-                        a.progressPercentage
-                )
-                .slice(0, 4);
-
-
-        const topStudentsContainer =
-            document.getElementById(
-                "topStudents"
-            );
-
-
-        topStudentsContainer.innerHTML =
-            topStudents.map(
-                (student, index) => {
-
-                    return `
-                        <div class="student">
-
-                            <strong>
-                                #${index + 1}
-                                &nbsp;
-                                ${student.student}
-                            </strong>
-
-                            <span class="percentage">
-                                ${student.progressPercentage}%
-                            </span>
-
-                        </div>
-                    `;
-
-                }
-            ).join("");
-
-    })
-
-    .catch(error => {
-
-        console.error(
-            "Average performance error:",
-            error
-        );
-
-        document.getElementById(
-            "averagePerformance"
-        ).innerText =
-            "0%";
-
-        document.getElementById(
-            "attentionCount"
-        ).innerText =
-            "0 students need attention";
-
-        document.getElementById(
-            "topStudents"
-        ).innerHTML = `
-            <div class="student">
-                <strong>
-                    Unable to load student progress
-                </strong>
-            </div>
-        `;
-
-    });
-
-
-/* =========================
-   REAL STUDENT MESSAGES
-========================= */
-
-fetch("http://localhost:8081/api/communication")
-
-    .then(response => {
-
-        if (!response.ok) {
-            throw new Error(
-                "Failed to load communication count"
-            );
-        }
-
-        return response.json();
-
-    })
-
-    .then(messageCount => {
-
-        document.getElementById(
-            "newMessageCount"
-        ).innerText =
-            messageCount +
-            " new student messages";
-
-    })
-
-    .catch(error => {
-
-        console.error(
-            "Communication error:",
-            error
-        );
-
-        document.getElementById(
-            "newMessageCount"
-        ).innerText =
-            "0 new student messages";
-
-    });
-
-
-/* =========================
-   TEMPORARY OPTIONS
-========================= */
-
-function showMessage(option) {
-
-    alert(
-        option +
-        " section will be available soon."
-    );
-
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-function logoutTeacher() {
-
-    localStorage.removeItem("userEmail");
-
-    localStorage.removeItem("userName");
-
-    localStorage.removeItem("userRole");
-
-    window.location.href =
-        "index.html";
-
-}
+    }
 
 </script>
 
 </body>
 
 </html>
-```
