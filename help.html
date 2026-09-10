@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support - Capacity Connect</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #173b8f;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 26px;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            color: #173b8f;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            color: #666;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .section h3 {
+            color: #173b8f;
+            margin-bottom: 20px;
+        }
+
+        .faq {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .faq:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #173b8f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #0f2c70;
+        }
+
+        .support-box {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .support-card {
+            flex: 1;
+            min-width: 220px;
+            background: #f4f7fb;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .support-card h4 {
+            color: #173b8f;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #e7f7ed;
+            color: #1d7a3b;
+            border-radius: 7px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>CAPACITY CONNECT</h1>
+    <a href="dashboard.html" class="back">← Back to Dashboard</a>
+</header>
+
+<div class="container">
+
+    <div class="welcome">
+        <h2>Help & Support</h2>
+        <p>We're here to help you solve your problems and get the most out of Capacity Connect.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+        <h3>Frequently Asked Questions</h3>
+
+        <div class="faq">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How can I enroll in a course?
+            </div>
+            <div class="faq-answer">
+                Open the Courses section from your dashboard and select the course you want to learn.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How can I attempt a quiz?
+            </div>
+            <div class="faq-answer">
+                Open your enrolled course, select the required module and click on the quiz option.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                How can I check my progress?
+            </div>
+            <div class="faq-answer">
+                Go to the My Progress section from your dashboard to view your learning progress.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                When can I get my certificate?
+            </div>
+            <div class="faq-answer">
+                Your certificate becomes available after completing all required course modules and assessments.
+            </div>
+        </div>
+
+        <div class="faq">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                What should I do if a course is not loading?
+            </div>
+            <div class="faq-answer">
+                Refresh the page and check your internet connection. If the problem continues, report the issue using the form below.
+            </div>
+        </div>
+    </div>
+
+    <!-- Report Issue -->
+    <div class="section">
+        <h3>Report an Issue</h3>
+
+        <form onsubmit="reportIssue(event)">
+
+            <label for="issueType">Issue Type</label>
+
+            <select id="issueType" required>
+                <option value="">Select Issue</option>
+                <option>Login Problem</option>
+                <option>Course Not Loading</option>
+                <option>Quiz Problem</option>
+                <option>Progress Problem</option>
+                <option>Certificate Problem</option>
+                <option>Technical Issue</option>
+                <option>Other</option>
+            </select>
+
+            <label for="issueDescription">Describe Your Problem</label>
+
+            <textarea
+                id="issueDescription"
+                placeholder="Describe your issue here..."
+                required>
+            </textarea>
+
+            <button type="submit">Submit Issue</button>
+
+            <div class="success" id="successMessage">
+                Your issue has been submitted successfully! Our support team will look into it.
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Contact Support -->
+    <div class="section">
+        <h3>Contact Support</h3>
+
+        <div class="support-box">
+
+            <div class="support-card">
+                <h4>Email Support</h4>
+                <p>support@capacityconnect.com</p>
+            </div>
+
+            <div class="support-card">
+                <h4>Technical Support</h4>
+                <p>For website and technical issues</p>
+            </div>
+
+            <div class="support-card">
+                <h4>Learning Support</h4>
+                <p>For course, quiz and learning related issues</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Capacity Connect | Help & Support
+</footer>
+
+<script>
+
+    function toggleFAQ(element) {
+
+        const answer = element.nextElementSibling;
+
+        answer.classList.toggle("show");
+    }
+
+
+    function reportIssue(event) {
+
+        event.preventDefault();
+
+        const issueType = document.getElementById("issueType").value;
+        const description =
+            document.getElementById("issueDescription").value.trim();
+
+        if (issueType === "" || description === "") {
+            alert("Please fill all details.");
+            return;
+        }
+
+        const ticketId =
+            "CC-" + Math.floor(100000 + Math.random() * 900000);
+
+        localStorage.setItem("supportIssueType", issueType);
+        localStorage.setItem("supportIssueDescription", description);
+        localStorage.setItem("supportTicketId", ticketId);
+
+        document.getElementById("successMessage").style.display = "block";
+
+        document.getElementById("successMessage").innerHTML =
+            "Issue submitted successfully!<br>" +
+            "Your Ticket ID: <b>" + ticketId + "</b>";
+
+        document.getElementById("issueType").value = "";
+        document.getElementById("issueDescription").value = "";
+    }
+
+</script>
+
+</body>
+</html>

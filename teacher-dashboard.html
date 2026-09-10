@@ -1,693 +1,1066 @@
+```html
 <!DOCTYPE html>
+
 <html>
 
 <head>
     <title>Capacity Connect - Teacher Dashboard</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6fb;
-            color: #222;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6fb;
+        color: #222;
+    }
 
-        /* NAVBAR */
+    header {
+        background: white;
+        padding: 18px 55px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 10px #ddd;
+    }
 
-        header {
-            background: white;
-            padding: 18px 55px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 10px #ddd;
-        }
+    .logo {
+        color: #3159c9;
+        font-size: 25px;
+        font-weight: bold;
+    }
 
-        .logo {
-            color: #3159c9;
-            font-size: 25px;
-            font-weight: bold;
+    .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: #555;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .nav a:hover {
+        color: #3159c9;
+    }
+
+    .teacher {
+        background: #f0f3ff;
+        padding: 10px 15px;
+        border-radius: 25px;
+        font-weight: bold;
+    }
+
+    /* HELP BUTTON */
+
+    .help-btn {
+        background: white;
+        color: #3159c9;
+        border: 2px solid #3159c9;
+        padding: 9px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .help-btn:hover {
+        background: #3159c9;
+        color: white;
+    }
+
+    .logout {
+        background: #3159c9;
+        color: white;
+        border: none;
+        padding: 11px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .logout:hover {
+        background: #23449e;
+    }
+
+    .container {
+        max-width: 1300px;
+        margin: auto;
+        padding: 40px 25px;
+    }
+
+    .welcome {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .welcome h1 {
+        font-size: 34px;
+        margin-bottom: 8px;
+    }
+
+    .welcome p {
+        color: #777;
+    }
+
+    .date-box {
+        background: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px #ddd;
+        color: #666;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px #ddd;
+    }
+
+    .stat-icon {
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+
+    .stat-card h2 {
+        color: #3159c9;
+        font-size: 30px;
+        margin-bottom: 5px;
+    }
+
+    .stat-card p {
+        color: #777;
+    }
+
+    .section-title {
+        margin: 30px 0 18px;
+        color: #222;
+    }
+
+    .options {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .option-card {
+        background: white;
+        padding: 25px;
+        border-radius: 14px;
+        box-shadow: 0 2px 10px #ddd;
+        text-align: center;
+        transition: 0.2s;
+    }
+
+    .option-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .option-icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .option-card h3 {
+        color: #3159c9;
+        margin-bottom: 10px;
+    }
+
+    .option-card p {
+        color: #777;
+        min-height: 45px;
+        margin-bottom: 18px;
+    }
+
+    .option-card button {
+        background: #3159c9;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    .option-card button:hover {
+        background: #23449e;
+    }
+
+    .bottom-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-top: 30px;
+    }
+
+    .box {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px #ddd;
+    }
+
+    .box h2 {
+        margin-bottom: 20px;
+    }
+
+    .activity {
+        padding: 15px;
+        background: #f7f8fc;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+
+    .student {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .percentage {
+        color: #3159c9;
+        font-weight: bold;
+    }
+
+    @media screen and (max-width: 900px) {
+        .stats,
+        .options {
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
+            display: none;
         }
 
-        .nav a {
-            text-decoration: none;
-            color: #555;
-            font-weight: bold;
-            cursor: pointer;
+        .bottom-section {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .stats,
+        .options {
+            grid-template-columns: 1fr;
         }
 
-        .nav a:hover {
-            color: #3159c9;
-        }
-
-        .teacher {
-            background: #f0f3ff;
-            padding: 10px 15px;
-            border-radius: 25px;
-            font-weight: bold;
-        }
-
-        .logout {
-            background: #3159c9;
-            color: white;
-            border: none;
-            padding: 11px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .logout:hover {
-            background: #23449e;
-        }
-
-        /* MAIN */
-
-        .container {
-            max-width: 1300px;
-            margin: auto;
-            padding: 40px 25px;
+        header {
+            padding: 15px 20px;
         }
 
         .welcome {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .welcome h1 {
-            font-size: 34px;
-            margin-bottom: 8px;
-        }
-
-        .welcome p {
-            color: #777;
-        }
-
-        .date-box {
-            background: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px #ddd;
-            color: #666;
-        }
-
-        /* STAT CARDS */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px #ddd;
-        }
-
-        .stat-icon {
-            font-size: 25px;
-            margin-bottom: 15px;
-        }
-
-        .stat-card h2 {
-            color: #3159c9;
-            font-size: 30px;
-            margin-bottom: 5px;
-        }
-
-        .stat-card p {
-            color: #777;
-        }
-
-        /* DASHBOARD OPTIONS */
-
-        .section-title {
-            margin: 30px 0 18px;
-            color: #222;
-        }
-
-        .options {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            flex-direction: column;
+            align-items: flex-start;
             gap: 20px;
         }
+    }
+</style>
 
-        .option-card {
-            background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 2px 10px #ddd;
-            text-align: center;
-            transition: 0.2s;
-        }
-
-        .option-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .option-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        .option-card h3 {
-            color: #3159c9;
-            margin-bottom: 10px;
-        }
-
-        .option-card p {
-            color: #777;
-            min-height: 45px;
-            margin-bottom: 18px;
-        }
-
-        .option-card button {
-            background: #3159c9;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 7px;
-            cursor: pointer;
-        }
-
-        .option-card button:hover {
-            background: #23449e;
-        }
-
-        /* QUICK OVERVIEW */
-
-        .bottom-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .box {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px #ddd;
-        }
-
-        .box h2 {
-            margin-bottom: 20px;
-        }
-
-        .activity {
-            padding: 15px;
-            background: #f7f8fc;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-
-        .student {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .percentage {
-            color: #3159c9;
-            font-weight: bold;
-        }
-
-        /* MOBILE */
-
-        @media screen and (max-width: 900px) {
-
-            .stats,
-            .options {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .nav {
-                display: none;
-            }
-
-            .bottom-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-
-            .stats,
-            .options {
-                grid-template-columns: 1fr;
-            }
-
-            header {
-                padding: 15px 20px;
-            }
-
-            .welcome {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 20px;
-            }
-        }
-    </style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
+<header>
 
-    <header>
+<div class="logo">
+    Capacity Connect
+</div>
 
-        <div class="logo">
-            Capacity Connect
-        </div>
+<div class="nav">
 
-        <div class="nav">
+    <a onclick="window.location.href='teacher-dashboard.html'">
+        Dashboard
+    </a>
 
-            <a onclick="window.location.href='teacher-dashboard.html'">
-                Dashboard
-            </a>
+    <a onclick="window.location.href='students.html'">
+        Students
+    </a>
 
-            <a onclick="window.location.href='students.html'">
-                Students
-            </a>
+    <a onclick="window.location.href='assignments.html'">
+        Tasks
+    </a>
 
-            <!-- TASKS / ASSIGNMENTS -->
+    <a onclick="showMessage('Progress')">
+        Progress
+    </a>
 
-            <a onclick="window.location.href='assignments.html'">
-                Tasks
-            </a>
+    <a onclick="window.location.href='student-communication.html'">
+        Messages
+    </a>
 
-            <a onclick="showMessage('Progress')">
-                Progress
-            </a>
+    <a onclick="showMessage('Reports')">
+        Reports
+    </a>
 
-            <a onclick="window.location.href='student-communication.html'">
-                Messages
-            </a>
+</div>
 
-            <a onclick="showMessage('Reports')">
-                Reports
-            </a>
+<div style="display:flex; gap:10px; align-items:center;">
 
-        </div>
+    <div class="teacher">
+        👨‍🏫 <span id="teacherNameTop">Teacher</span>
+    </div>
 
-        <div style="display:flex; gap:15px; align-items:center;">
+    <!-- HELP -->
 
-            <div class="teacher">
-                👨‍🏫 <span id="teacherNameTop">Teacher</span>
-            </div>
+    <button class="help-btn"
+        onclick="window.location.href='help.html'">
+        ❓ Help
+    </button>
 
-            <button class="logout" onclick="logoutTeacher()">
-                Logout
-            </button>
+    <!-- LOGOUT -->
 
-        </div>
+    <button class="logout" onclick="logoutTeacher()">
+        Logout
+    </button>
 
-    </header>
+</div>
 
+</header>
 
-    <div class="container">
 
-        <!-- WELCOME -->
+<div class="container">
 
-        <section class="welcome">
+<section class="welcome">
 
-            <div>
+    <div>
 
-                <h1>
-                    Welcome, <span id="teacherName">Teacher</span>! 👋
-                </h1>
+        <h1>
+            Welcome, <span id="teacherName">Teacher</span>! 👋
+        </h1>
 
-                <p>
-                    Manage learning, assignments and student development from one place.
-                </p>
+        <p>
+            Manage learning, assignments and student development from one place.
+        </p>
 
-            </div>
+    </div>
 
-            <div class="date-box">
-                📅 September 08, 2026
-            </div>
+    <div class="date-box">
+        📅 <span id="currentDate"></span>
+    </div>
 
-        </section>
+</section>
 
 
-        <!-- STATISTICS -->
+<!-- STATISTICS -->
 
-        <section class="stats">
+<section class="stats">
 
-            <div class="stat-card">
+    <div class="stat-card">
 
-                <div class="stat-icon">👥</div>
+        <div class="stat-icon">👥</div>
 
-                <h2>45</h2>
+        <h2 id="studentCount">Loading...</h2>
 
-                <p>Total Students</p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">📚</div>
-
-                <h2>18</h2>
-
-                <p>Active Assignments</p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">✅</div>
-
-                <h2>32</h2>
-
-                <p>Pending Reviews</p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-icon">📈</div>
-
-                <h2>78%</h2>
-
-                <p>Average Performance</p>
-
-            </div>
-
-        </section>
-
-
-        <!-- OPTIONS -->
-
-        <h2 class="section-title">
-            Teacher Options
-        </h2>
-
-        <section class="options">
-
-
-            <!-- COURSES -->
-
-            <div class="option-card">
-
-                <div class="option-icon">📚</div>
-
-                <h3>Manage Courses</h3>
-
-                <p>
-                    Create and manage your training courses.
-                </p>
-
-                <button onclick="window.location.href='teacher-courses.html'">
-                    Open
-                </button>
-
-            </div>
-
-
-            <!-- TRAINING MATERIALS -->
-
-            <div class="option-card">
-
-                <div class="option-icon">📖</div>
-
-                <h3>Training Materials</h3>
-
-                <p>
-                    Upload notes, videos and learning materials.
-                </p>
-
-                <button onclick="window.location.href='training-materials.html'">
-                    Open
-                </button>
-
-            </div>
-
-
-            <!-- ASSIGNMENTS / TASKS -->
-
-            <div class="option-card">
-
-                <div class="option-icon">📋</div>
-
-                <h3>Assignments / Tasks</h3>
-
-                <p>
-                    Create and assign tasks for students.
-                </p>
-
-                <button onclick="window.location.href='assignments.html'">
-                    Open
-                </button>
-
-            </div>
-
-
-            <!-- ASSESSMENTS -->
-
-            <div class="option-card">
-
-                <div class="option-icon">📝</div>
-
-                <h3>Assessments</h3>
-
-                <p>
-                    Create quizzes and assessments for learners.
-                </p>
-
-                <button onclick="showMessage('Assessments')">
-                    Open
-                </button>
-
-            </div>
-
-
-            <!-- STUDENTS -->
-
-            <div class="option-card">
-
-                <div class="option-icon">👨‍🎓</div>
-
-                <h3>Students</h3>
-
-                <p>
-                    View students and monitor their activities.
-                </p>
-
-                <button onclick="window.location.href='students.html'">
-                    View
-                </button>
-
-            </div>
-
-
-            <!-- PERFORMANCE -->
-
-            <div class="option-card">
-
-                <div class="option-icon">📊</div>
-
-                <h3>Performance</h3>
-
-                <p>
-                    Monitor learner progress and results.
-                </p>
-
-                <button onclick="showMessage('Performance')">
-                    View
-                </button>
-
-            </div>
-
-
-            <!-- COMMUNICATION -->
-
-            <div class="option-card">
-
-                <div class="option-icon">💬</div>
-
-                <h3>Student Communication</h3>
-
-                <p>
-                    Communicate with students and provide feedback.
-                </p>
-
-                <button onclick="window.location.href='student-communication.html'">
-                    Open
-                </button>
-
-            </div>
-
-
-            <!-- KNOWLEDGE HUB -->
-
-            <div class="option-card">
-
-                <div class="option-icon">💡</div>
-
-                <h3>Knowledge Hub</h3>
-
-                <p>
-                    Share useful knowledge and resources.
-                </p>
-
-                <button onclick="window.location.href='knowledge.html'">
-                    Open
-                </button>
-
-            </div>
-
-
-            <!-- REPORTS -->
-
-            <div class="option-card">
-
-                <div class="option-icon">📈</div>
-
-                <h3>Reports</h3>
-
-                <p>
-                    View learning and performance reports.
-                </p>
-
-                <button onclick="showMessage('Reports')">
-                    View
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- QUICK OVERVIEW -->
-
-        <section class="bottom-section">
-
-            <div class="box">
-
-                <h2>⚡ Quick Overview</h2>
-
-                <div class="activity">
-                    <strong>6 assignments due soon</strong>
-                    <br>
-                    <span>Review deadlines</span>
-                </div>
-
-                <div class="activity">
-                    <strong>12 submissions waiting</strong>
-                    <br>
-                    <span>Ready for evaluation</span>
-                </div>
-
-                <div class="activity">
-                    <strong>3 students need attention</strong>
-                    <br>
-                    <span>Progress below 50%</span>
-                </div>
-
-                <div class="activity">
-                    <strong>4 new student messages</strong>
-                    <br>
-                    <span>Check communication</span>
-                </div>
-
-            </div>
-
-
-            <!-- TOP STUDENTS -->
-
-            <div class="box">
-
-                <h2>🏆 Top Students</h2>
-
-                <div class="student">
-                    <strong>#1 &nbsp; Shivani</strong>
-                    <span class="percentage">85%</span>
-                </div>
-
-                <div class="student">
-                    <strong>#2 &nbsp; Rahul</strong>
-                    <span class="percentage">72%</span>
-                </div>
-
-                <div class="student">
-                    <strong>#3 &nbsp; Anjali</strong>
-                    <span class="percentage">65%</span>
-                </div>
-
-                <div class="student">
-                    <strong>#4 &nbsp; Student 4</strong>
-                    <span class="percentage">61%</span>
-                </div>
-
-            </div>
-
-        </section>
+        <p>Total Students</p>
 
     </div>
 
 
-    <script>
+    <div class="stat-card">
 
-        /* TEACHER NAME */
+        <div class="stat-icon">📚</div>
 
-        let teacherName =
-            localStorage.getItem("userName");
+        <h2 id="assignmentCount">Loading...</h2>
 
-        if (teacherName) {
+        <p>Active Assignments</p>
 
-            document.getElementById("teacherName").innerText =
-                teacherName;
+    </div>
 
-            document.getElementById("teacherNameTop").innerText =
-                teacherName;
+
+    <div class="stat-card">
+
+        <div class="stat-icon">✅</div>
+
+        <h2 id="pendingReviewCount">Loading...</h2>
+
+        <p>Pending Reviews</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">📈</div>
+
+        <h2 id="averagePerformance">Loading...</h2>
+
+        <p>Average Performance</p>
+
+    </div>
+
+</section>
+
+
+<!-- TEACHER OPTIONS -->
+
+<h2 class="section-title">
+    Teacher Options
+</h2>
+
+<section class="options">
+
+    <div class="option-card">
+
+        <div class="option-icon">📚</div>
+
+        <h3>Manage Courses</h3>
+
+        <p>
+            Create and manage your training courses.
+        </p>
+
+        <button onclick="window.location.href='teacher-courses.html'">
+            Open
+        </button>
+
+    </div>
+
+
+    <div class="option-card">
+
+        <div class="option-icon">📖</div>
+
+        <h3>Training Materials</h3>
+
+        <p>
+            Upload notes, videos and learning materials.
+        </p>
+
+        <button onclick="window.location.href='training-materials.html'">
+            Open
+        </button>
+
+    </div>
+
+
+    <div class="option-card">
+
+        <div class="option-icon">📋</div>
+
+        <h3>Assignments / Tasks</h3>
+
+        <p>
+            Create and assign tasks for students.
+        </p>
+
+        <button onclick="window.location.href='assignments.html'">
+            Open
+        </button>
+
+    </div>
+
+
+    <div class="option-card">
+
+        <div class="option-icon">📝</div>
+
+        <h3>Assessments</h3>
+
+        <p>
+            Create quizzes and assessments for learners.
+        </p>
+
+        <button onclick="showMessage('Assessments')">
+            Open
+        </button>
+
+    </div>
+
+
+    <div class="option-card">
+
+        <div class="option-icon">👨‍🎓</div>
+
+        <h3>Students</h3>
+
+        <p>
+            View students and monitor their activities.
+        </p>
+
+        <button onclick="window.location.href='students.html'">
+            View
+        </button>
+
+    </div>
+
+
+    <div class="option-card">
+
+        <div class="option-icon">📊</div>
+
+        <h3>Performance</h3>
+
+        <p>
+            Monitor learner progress and results.
+        </p>
+
+        <button onclick="showMessage('Performance')">
+            View
+        </button>
+
+    </div>
+
+
+    <div class="option-card">
+
+        <div class="option-icon">💬</div>
+
+        <h3>Student Communication</h3>
+
+        <p>
+            Communicate with students and provide feedback.
+        </p>
+
+        <button onclick="window.location.href='student-communication.html'">
+            Open
+        </button>
+
+    </div>
+
+
+    <div class="option-card">
+
+        <div class="option-icon">💡</div>
+
+        <h3>Knowledge Hub</h3>
+
+        <p>
+            Share useful knowledge and resources.
+        </p>
+
+        <button onclick="window.location.href='knowledge.html'">
+            Open
+        </button>
+
+    </div>
+
+
+    <div class="option-card">
+
+        <div class="option-icon">📈</div>
+
+        <h3>Reports</h3>
+
+        <p>
+            View learning and performance reports.
+        </p>
+
+        <button onclick="showMessage('Reports')">
+            View
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK OVERVIEW + TOP STUDENTS -->
+
+<section class="bottom-section">
+
+    <div class="box">
+
+        <h2>⚡ Quick Overview</h2>
+
+        <div class="activity">
+
+            <strong id="dueSoonCount">
+                Loading...
+            </strong>
+
+            <br>
+
+            <span>
+                Review deadlines
+            </span>
+
+        </div>
+
+
+        <div class="activity">
+
+            <strong id="submissionWaitingCount">
+                Loading...
+            </strong>
+
+            <br>
+
+            <span>
+                Ready for evaluation
+            </span>
+
+        </div>
+
+
+        <div class="activity">
+
+            <strong id="attentionCount">
+                Loading...
+            </strong>
+
+            <br>
+
+            <span>
+                Progress below 50%
+            </span>
+
+        </div>
+
+
+        <div class="activity">
+
+            <strong id="newMessageCount">
+                Loading...
+            </strong>
+
+            <br>
+
+            <span>
+                Check communication
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>🏆 Top Students</h2>
+
+        <div id="topStudents">
+
+            <div class="student">
+
+                <strong>
+                    Loading students...
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =========================
+   TEACHER NAME
+========================= */
+
+let teacherName = localStorage.getItem("userName");
+
+if (teacherName) {
+
+    document.getElementById("teacherName").innerText =
+        teacherName;
+
+    document.getElementById("teacherNameTop").innerText =
+        teacherName;
+
+}
+
+
+/* =========================
+   CURRENT DATE
+========================= */
+
+const today = new Date();
+
+const formattedDate = today.toLocaleDateString("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric"
+});
+
+document.getElementById("currentDate").innerText =
+    formattedDate;
+
+
+/* =========================
+   REAL STUDENT COUNT
+========================= */
+
+fetch("http://localhost:8081/api/auth/student-count")
+
+    .then(response => response.text())
+
+    .then(count => {
+
+        document.getElementById("studentCount").innerText =
+            count;
+
+    })
+
+    .catch(error => {
+
+        console.error("Student count error:", error);
+
+        document.getElementById("studentCount").innerText =
+            "0";
+
+    });
+
+
+/* =========================
+   REAL ASSIGNMENT COUNT
+========================= */
+
+fetch("http://localhost:8081/api/assignments")
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Failed to load assignments");
+        }
+
+        return response.json();
+
+    })
+
+    .then(assignments => {
+
+        document.getElementById("assignmentCount").innerText =
+            assignments.length;
+
+
+        const currentDate = new Date();
+
+        currentDate.setHours(0, 0, 0, 0);
+
+        const next7Days = new Date(currentDate);
+
+        next7Days.setDate(
+            currentDate.getDate() + 7
+        );
+
+
+        const dueSoon = assignments.filter(
+            assignment => {
+
+                const dueDate =
+                    new Date(assignment.dueDate);
+
+                dueDate.setHours(0, 0, 0, 0);
+
+                return (
+                    dueDate >= currentDate &&
+                    dueDate <= next7Days
+                );
+
+            }
+        );
+
+
+        document.getElementById("dueSoonCount").innerText =
+            dueSoon.length +
+            " assignments due soon";
+
+    })
+
+    .catch(error => {
+
+        console.error("Assignment error:", error);
+
+        document.getElementById("assignmentCount").innerText =
+            "0";
+
+        document.getElementById("dueSoonCount").innerText =
+            "0 assignments due soon";
+
+    });
+
+
+/* =========================
+   REAL PENDING REVIEWS
+========================= */
+
+fetch("http://localhost:8081/api/submissions")
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Failed to load submissions");
+        }
+
+        return response.json();
+
+    })
+
+    .then(submissions => {
+
+        document.getElementById("pendingReviewCount").innerText =
+            submissions.length;
+
+        document.getElementById("submissionWaitingCount").innerText =
+            submissions.length +
+            " submissions waiting";
+
+    })
+
+    .catch(error => {
+
+        console.error("Submission error:", error);
+
+        document.getElementById("pendingReviewCount").innerText =
+            "0";
+
+        document.getElementById("submissionWaitingCount").innerText =
+            "0 submissions waiting";
+
+    });
+
+
+/* =========================
+   REAL AVERAGE PERFORMANCE
+   + TOP STUDENTS
+========================= */
+
+fetch("http://localhost:8081/api/progress")
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Failed to load progress");
+        }
+
+        return response.json();
+
+    })
+
+    .then(progressData => {
+
+        if (progressData.length === 0) {
+
+            document.getElementById(
+                "averagePerformance"
+            ).innerText = "0%";
+
+            document.getElementById(
+                "attentionCount"
+            ).innerText =
+                "0 students need attention";
+
+            document.getElementById(
+                "topStudents"
+            ).innerHTML = `
+                <div class="student">
+                    <strong>
+                        No student progress available
+                    </strong>
+                </div>
+            `;
+
+            return;
 
         }
 
 
-        /* MESSAGE FOR TEMPORARY OPTIONS */
+        const totalProgress =
+            progressData.reduce(
+                (sum, item) =>
+                    sum + item.progressPercentage,
+                0
+            );
 
-        function showMessage(option) {
 
-            alert(option + " section will be available soon.");
+        const averageProgress =
+            Math.round(
+                totalProgress /
+                progressData.length
+            );
 
+
+        document.getElementById(
+            "averagePerformance"
+        ).innerText =
+            averageProgress + "%";
+
+
+        const studentsNeedAttention =
+            progressData.filter(
+                item =>
+                    item.progressPercentage < 50
+            );
+
+
+        document.getElementById(
+            "attentionCount"
+        ).innerText =
+            studentsNeedAttention.length +
+            " students need attention";
+
+
+        /* TOP STUDENTS */
+
+        const topStudents =
+            [...progressData]
+                .sort(
+                    (a, b) =>
+                        b.progressPercentage -
+                        a.progressPercentage
+                )
+                .slice(0, 4);
+
+
+        const topStudentsContainer =
+            document.getElementById(
+                "topStudents"
+            );
+
+
+        topStudentsContainer.innerHTML =
+            topStudents.map(
+                (student, index) => {
+
+                    return `
+                        <div class="student">
+
+                            <strong>
+                                #${index + 1}
+                                &nbsp;
+                                ${student.student}
+                            </strong>
+
+                            <span class="percentage">
+                                ${student.progressPercentage}%
+                            </span>
+
+                        </div>
+                    `;
+
+                }
+            ).join("");
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            "Average performance error:",
+            error
+        );
+
+        document.getElementById(
+            "averagePerformance"
+        ).innerText =
+            "0%";
+
+        document.getElementById(
+            "attentionCount"
+        ).innerText =
+            "0 students need attention";
+
+        document.getElementById(
+            "topStudents"
+        ).innerHTML = `
+            <div class="student">
+                <strong>
+                    Unable to load student progress
+                </strong>
+            </div>
+        `;
+
+    });
+
+
+/* =========================
+   REAL STUDENT MESSAGES
+========================= */
+
+fetch("http://localhost:8081/api/communication")
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error(
+                "Failed to load communication count"
+            );
         }
 
+        return response.json();
 
-        /* LOGOUT */
+    })
 
-        function logoutTeacher() {
+    .then(messageCount => {
 
-            localStorage.removeItem("userEmail");
-            localStorage.removeItem("userName");
-            localStorage.removeItem("userRole");
+        document.getElementById(
+            "newMessageCount"
+        ).innerText =
+            messageCount +
+            " new student messages";
 
-            window.location.href = "index.html";
+    })
 
-        }
+    .catch(error => {
 
-    </script>
+        console.error(
+            "Communication error:",
+            error
+        );
+
+        document.getElementById(
+            "newMessageCount"
+        ).innerText =
+            "0 new student messages";
+
+    });
+
+
+/* =========================
+   TEMPORARY OPTIONS
+========================= */
+
+function showMessage(option) {
+
+    alert(
+        option +
+        " section will be available soon."
+    );
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutTeacher() {
+
+    localStorage.removeItem("userEmail");
+
+    localStorage.removeItem("userName");
+
+    localStorage.removeItem("userRole");
+
+    window.location.href =
+        "index.html";
+
+}
+
+</script>
 
 </body>
 
 </html>
+```
