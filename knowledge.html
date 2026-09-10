@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Knowledge Hub - Capacity Connect</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -38,7 +41,7 @@
         }
 
         .back:hover {
-            background: #eef3ff;
+            background: #e8eefc;
         }
 
         .container {
@@ -88,12 +91,6 @@
             background: #dce6ff;
         }
 
-        .resource a {
-            text-decoration: none;
-            color: #173b7a;
-            font-weight: bold;
-        }
-
         .no-result {
             display: none;
             background: white;
@@ -102,49 +99,22 @@
             border-radius: 10px;
             color: #777;
         }
-
-        @media (max-width: 768px) {
-
-            header {
-                padding: 18px 20px;
-            }
-
-            .container {
-                width: 90%;
-            }
-
-            header h2 {
-                font-size: 18px;
-            }
-
-            .back {
-                padding: 8px 12px;
-            }
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
-
     <header>
 
         <h2>CAPACITY CONNECT</h2>
 
-        <!-- FIXED: Goes back to Teacher Dashboard -->
-
-        <button class="back"
-            onclick="window.location.href='teacher-dashboard.html'">
-
+        <!-- BACK TO TEACHER DASHBOARD -->
+        <button class="back" onclick="goToTeacherDashboard()">
             ← Dashboard
-
         </button>
 
     </header>
 
-
-    <!-- MAIN CONTENT -->
 
     <div class="container">
 
@@ -155,8 +125,6 @@
             and professional knowledge.
         </p>
 
-
-        <!-- SEARCH -->
 
         <input
             type="text"
@@ -196,7 +164,7 @@
         </div>
 
 
-        <!-- PROGRAMMING FUNDAMENTALS -->
+        <!-- PROGRAMMING -->
 
         <div class="card">
 
@@ -247,8 +215,6 @@
         </div>
 
 
-        <!-- NO RESULT -->
-
         <div class="no-result" id="noResult">
 
             <h3>No resources found</h3>
@@ -262,17 +228,21 @@
     </div>
 
 
-    <!-- JAVASCRIPT -->
-
     <script>
 
+        // GO TO TEACHER DASHBOARD
+        function goToTeacherDashboard() {
+            window.location.href = "teacher-dashboard.html";
+        }
+
+
+        // SEARCH RESOURCES
         function searchResources() {
 
             let search =
-                document
-                    .getElementById("searchBox")
-                    .value
-                    .toLowerCase();
+                document.getElementById("searchBox")
+                .value
+                .toLowerCase();
 
             let resources =
                 document.querySelectorAll(".resource");
@@ -283,13 +253,10 @@
             let found = false;
 
 
-            /* SEARCH RESOURCES */
-
             resources.forEach(function(resource) {
 
                 let text =
                     resource.innerText.toLowerCase();
-
 
                 if (text.includes(search)) {
 
@@ -306,7 +273,7 @@
             });
 
 
-            /* SHOW / HIDE COURSE CARDS */
+            // SHOW / HIDE CARDS
 
             cards.forEach(function(card) {
 
@@ -315,13 +282,10 @@
 
                 let visibleCount = 0;
 
-
                 visibleResources.forEach(function(resource) {
 
                     if (resource.style.display !== "none") {
-
                         visibleCount++;
-
                     }
 
                 });
@@ -340,18 +304,16 @@
             });
 
 
-            /* NO RESULT MESSAGE */
+            // NO RESULT MESSAGE
 
             if (search !== "" && !found) {
 
-                document
-                    .getElementById("noResult")
+                document.getElementById("noResult")
                     .style.display = "block";
 
             } else {
 
-                document
-                    .getElementById("noResult")
+                document.getElementById("noResult")
                     .style.display = "none";
 
             }
